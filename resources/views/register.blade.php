@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SMS GURU - Register</title>
+    <title>Screen AML - Register</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -63,7 +63,7 @@
                             </div>
                         </div> -->
                         <div class="register-link m-t-15 text-center">
-                            <p>Already have account ? <a style="color:blue" href="login.html"> Sign in</a></p>
+                            <p>Already have account ? <a style="color:blue" href="{{ url('login') }}"> Sign in</a></p>
                         </div>
                     </form>
                 </div>
