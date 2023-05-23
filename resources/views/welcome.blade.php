@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Screen AML - Home</title>
+  <title>Smith & Bolton - Home</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -46,14 +46,14 @@
 
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
-        <span>Screen AML</span>
+        <span>Smith & Bolton</span>
       </a>
 
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#values">Values</a></li>
+          <li><a class="nav-link scrollto" href="#values">Services</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           <li><a class="getstarted scrollto" href="{{ url('/login') }}">Login</a></li>
         </ul>
@@ -101,15 +101,15 @@
             <div class="content">
               <h2>Why Choose Us</h2>
               <ul>
-              <li>Highest level of security and risk mitigation.</li>
-              <li>Taxonomies aligned to FATF recommendations.</li>
-              <li>Industry-leading API integration and uptime.</li>
-              <li>Improved digital infrastructure and support.</li>
-              <li>Configured to each FI’s individual risk profile.</li>
-              <li>Plug-and-play cloud application services.</li>
-              <li>Increase company margins.</li>
-              <li>Reduce & repurpose human resource costs.</li>
-              <li>Automate beyond human scale.</li>
+                <li>Highest level of security and risk mitigation.</li>
+                <li>Taxonomies aligned to FATF recommendations.</li>
+                <li>Industry-leading API integration and uptime.</li>
+                <li>Improved digital infrastructure and support.</li>
+                <li>Configured to each FI’s individual risk profile.</li>
+                <li>Plug-and-play cloud application services.</li>
+                <li>Increase company margins.</li>
+                <li>Reduce & repurpose human resource costs.</li>
+                <li>Automate beyond human scale.</li>
               </ul>
 
               <div class="text-center text-lg-start">
@@ -145,7 +145,7 @@
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
             <div class="box">
               <img src="assets/img/values-1.png" class="img-fluid" alt="">
-              <h3>Reduced Fraud Losses</h3>
+              <h3>AML Background Checks</h3>
               <p>Identify where your business is losing money to fraud and prevent it in real-time with minimal impact to your customers. Detect transactions originating from suspicious locations, currencies, deviations in behavior, and transactions from new accounts.</p>
 
             </div>
@@ -154,8 +154,8 @@
           <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
             <div class="box">
               <img src="assets/img/values-2.png" class="img-fluid" alt="">
-              <h3>Identify Risks</h3>
-              <p>Monitor hundreds of known typologies and trends within customer transactions to detect suspicious behavior.  Screen risks before they materialize and stop in real time.</p>
+              <h3>Fraud Detection</h3>
+              <p>Monitor hundreds of known typologies and trends within customer transactions to detect suspicious behavior. Screen risks before they materialize and stop in real time.</p>
 
             </div>
           </div>
@@ -163,7 +163,7 @@
           <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">
             <div class="box">
               <img src="assets/img/values-3.png" class="img-fluid" alt="">
-              <h3>Customize Your Approach</h3>
+              <h3>Transaction Monitoring</h3>
               <p>Leverage our proprietary combination of risk data, intuitive case management, and smarter matching capabilities to tailor your AML screening & monitoring process to the unique needs of your business.</p>
 
             </div>
@@ -245,21 +245,21 @@
                 <div class="info-box">
                   <i class="bi bi-geo-alt"></i>
                   <h3>Address</h3>
-                  <p>A108 Adam Street,<br>New York, NY 535022</p>
+                  <p>1001 Gaba Road,<br>Kampala, Uganda</p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="info-box">
                   <i class="bi bi-telephone"></i>
                   <h3>Call Us</h3>
-                  <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+                  <p>+256 392 912 222<br>+256 776 222 504</p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="info-box">
                   <i class="bi bi-envelope"></i>
                   <h3>Email Us</h3>
-                  <p>info@example.com<br>contact@example.com</p>
+                  <p>comply@smithandboltons.com<br>
                 </div>
               </div>
               <div class="col-md-6">
@@ -339,7 +339,7 @@
           <div class="col-lg-5 col-md-12 footer-info">
             <a href="index.html" class="logo d-flex align-items-center">
               <img src="assets/img/logo.png" alt="">
-              <span>Screen AML</span>
+              <span>Smith & Bolton</span>
             </a>
             <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
             <div class="social-links mt-3">
@@ -364,22 +364,22 @@
           <div class="col-lg-2 col-6 footer-links">
             <h4>Our Services</h4>
             <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">AML Solutions</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Customer Screening</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Transaction Monitoring</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Fraud Detection</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Corporate Onboarding</a></li>
             </ul>
           </div>
 
           <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
             <h4>Contact Us</h4>
-            <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
+
+            <p>1001 Gaba Road, <br> Next to American Embassy<br>Kampala, Uganda
+
+              <br><br>
+              <strong>Phone:</strong> +256 776 222 504<br>
+              <strong>Email:</strong> comply@smithandboltons.com<br>
             </p>
 
           </div>
@@ -390,14 +390,14 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Screen AML</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>Smith & Bolton</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ -->
-        Designed by <a href="https://emasonsug.com/">Emasons Uganda</a>
+        <!-- Designed by <a href="https://emasonsug.com/">Emasons Uganda</a> -->
       </div>
     </div>
   </footer><!-- End Footer -->
