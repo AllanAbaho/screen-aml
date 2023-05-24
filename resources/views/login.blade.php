@@ -56,7 +56,8 @@
                             </label>
 
                         </div>
-                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Sign in</button>
+                        <!-- <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Sign in</button> -->
+                        <a href="{{ url('dashboard/index') }}" class="btn btn-primary btn-flat m-b-30 m-t-30"> Login</a>
                         <!-- <div class="social-login-content">
                             <div class="social-button">
                                 <button type="submit" class="btn social facebook btn-flat btn-addon mb-3"><i class="ti-facebook"></i>Sign in with facebook</button>

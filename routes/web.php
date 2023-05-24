@@ -25,6 +25,15 @@ Route::get('/register', function () {
 Route::get('/dashboard/index', function () {
     return view('dashboard/index');
 });
+Route::get('/dashboard/add-credit', function () {
+    return view('dashboard/add-credit');
+});
+Route::get('/dashboard/search-person', function () {
+    return view('dashboard/search-person');
+});
+Route::get('/dashboard/search-company', function () {
+    return view('dashboard/search-company');
+});
 Route::get('/forgot-password', function () {
     return view('forgot-password');
 });

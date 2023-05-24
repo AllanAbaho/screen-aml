@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Screen AML - Add Credit</title>
+    <title>Screen AML - Search Company</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -37,7 +37,7 @@
 
     <div id="right-panel" class="right-panel">
 
-    @include('dashboard.custom-header')
+        @include('dashboard.custom-header')
 
         <div class="breadcrumbs">
             <div class="breadcrumbs-inner">
@@ -45,7 +45,7 @@
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>Add Credit</h1>
+                                <h1><span><i class="fa fa-building-o"></i> Search</span></h1>
                             </div>
                         </div>
                     </div>
@@ -53,8 +53,8 @@
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="#">Add Credit</a></li>
-                                    <li class="active">Mobile Money</li>
+                                    <li><a href="#">Search</a></li>
+                                    <li class="active">Company</li>
                                 </ol>
                             </div>
                         </div>
@@ -68,17 +68,25 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header"><strong>Add Credit</strong><small> Mobile Money</small></div>
+                            <div class="card-header"><strong>Search</strong><small> Company</small></div>
                             <div class="card-body card-block">
                                 <div class="form-group">
-                                    <label for="company" class=" form-control-label">Phone Number</label>
-                                    <input type="number" id="company" value="0700465656" placeholder="Enter recipient phone number" class="form-control">
+                                    <label for="company" class=" form-control-label">Company Name</label>
+                                    <input type="text" id="company" value="" placeholder="Enter company name" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="company" class=" form-control-label">Amount</label>
-                                    <input type="number" id="company" placeholder="Enter the amount" class="form-control">
+                                    <label for="company" class=" form-control-label">Match Type</label>
+                                    <select class="form-control" tabindex="1">
+                                    <option>Please Select Match Type</option>
+                                    <option value="Sanctions">Sanctions</option>
+                                    <option value="Warnings">Warnings</option>
+                                        <option value="PEPs">PEPs</option>
+                                        <option value="Fraud">Fraud</option>
+                                        <option value="Terrorism">Terrorism</option>
+                                    </select>
                                 </div>
-                                <button type="submit" class="btn btn-success btn-sm">Send</button>
+
+                                <button type="submit" class="btn btn-success btn-sm">Search</button>
                             </div>
                         </div>
                     </div>

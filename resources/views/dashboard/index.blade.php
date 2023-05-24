@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SMS Portal</title>
+    <title>Screen AML - Dashboard</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -19,8 +19,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="{{ asset('assets/backend/css/cs-skin-elastic.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/backend/css/style.css') }}">
@@ -54,7 +53,7 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text">Shs.<span class="count">100000</span></div>
+                                            <div class="stat-text">Shs.<span class="count">120000</span></div>
                                             <div class="stat-heading">Total Spend</div>
                                         </div>
                                     </div>
@@ -68,12 +67,12 @@
                             <div class="card-body">
                                 <div class="stat-widget-five">
                                     <div class="stat-icon dib flat-color-2">
-                                        <i class="menu-icon ti-email"></i>
+                                        <i class="menu-icon fa fa-handshake-o"></i>
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">3435098</span></div>
-                                            <div class="stat-heading">Messages</div>
+                                            <div class="stat-text"><span class="count">343</span></div>
+                                            <div class="stat-heading">Matched Searches</div>
                                         </div>
                                     </div>
                                 </div>
@@ -86,12 +85,12 @@
                             <div class="card-body">
                                 <div class="stat-widget-five">
                                     <div class="stat-icon dib flat-color-3">
-                                        <i class="menu-icon fa fa-list"></i>
+                                        <i class="menu-icon fa fa-building-o"></i>
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">34</span></div>
-                                            <div class="stat-heading">Groups</div>
+                                            <div class="stat-text"><span class="count">17</span></div>
+                                            <div class="stat-heading">Company Searches</div>
                                         </div>
                                     </div>
                                 </div>
@@ -108,8 +107,8 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">3435</span></div>
-                                            <div class="stat-heading">Phone Book</div>
+                                            <div class="stat-text"><span class="count">156</span></div>
+                                            <div class="stat-heading">People Searches</div>
                                         </div>
                                     </div>
                                 </div>
@@ -121,7 +120,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="box-title">Recent Messages</h4>
+                                <h4 class="box-title">Recent Searches</h4>
                             </div>
                             <div class="row">
                                 <div class="col-lg-8">
@@ -129,34 +128,63 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">Phone Number</th>
-                                                <th scope="col">Text Message</th>
+                                                <th scope="col">Full Name</th>
+                                                <th scope="col">Search Type</th>
+                                                <th scope="col">Match Status</th>
+                                                <th scope="col">Searcher</th>
+                                                <th scope="col">Date Created</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <th scope="row">1</th>
-                                                <td>0700123834</td>
-                                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-                                                    provident deleniti totam aperiam, est itaque atque iusto quos velit
-                                                    repudiandae soluta quia id, consequuntur cupiditate natus in!
-                                                    Reiciendis, praesentium perferendis!</td>
+                                                <td>Robert Kyagulanyi</td>
+                                                <td>Person</td>
+                                                <td>Potential Match</td>
+                                                <td>Oscar Ofumbi</td>
+                                                <td>2023-05-30</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
-                                                <td>0700123834</td>
-                                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-                                                    provident deleniti totam aperiam, est itaque atque iusto quos velit
-                                                    repudiandae soluta quia id, consequuntur cupiditate natus in!
-                                                    Reiciendis, praesentium perferendis!</td>
+                                                <td>Airtel Uganda</td>
+                                                <td>Company</td>
+
+                                                <td>Potential Match</td>
+                                                <td>Oscar Ofumbi</td>
+                                                <td>2023-05-30</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">3</th>
-                                                <td>0700123834</td>
-                                                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-                                                    provident deleniti totam aperiam, est itaque atque iusto quos velit
-                                                    repudiandae soluta quia id, consequuntur cupiditate natus in!
-                                                    Reiciendis, praesentium perferendis!</td>
+                                                <td>Mukasa Mbidde</td>
+                                                <td>Person</td>
+
+                                                <td>Potential Match</td>
+                                                <td>Oscar Ofumbi</td>
+                                                <td>2023-05-30</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">4</th>
+                                                <td>Insure Small Small</td>
+                                                <td>Company</td>
+                                                <td>No Match</td>
+                                                <td>Oscar Ofumbi</td>
+                                                <td>2023-05-30</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">5</th>
+                                                <td>Allan Abaho</td>
+                                                <td>Person</td>
+                                                <td>No Match</td>
+                                                <td>Oscar Ofumbi</td>
+                                                <td>2023-05-30</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">6</th>
+                                                <td>BLQ Investments</td>
+                                                <td>Company</td>
+                                                <td>Potential Match</td>
+                                                <td>Oscar Ofumbi</td>
+                                                <td>2023-05-30</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -164,39 +192,31 @@
                                 <div class="col-lg-4">
                                     <div class="card-body">
                                         <div class="progress-box progress-1">
-                                            <h4 class="por-title">Visits</h4>
-                                            <div class="por-txt">96,930 Users (40%)</div>
+                                            <h4 class="por-title">Fraud</h4>
+                                            <div class="por-txt">96,930 Cases (40%)</div>
                                             <div class="progress mb-2" style="height: 5px;">
-                                                <div class="progress-bar bg-flat-color-1" role="progressbar"
-                                                    style="width: 40%;" aria-valuenow="25" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-flat-color-1" role="progressbar" style="width: 40%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                         <div class="progress-box progress-2">
-                                            <h4 class="por-title">Bounce Rate</h4>
-                                            <div class="por-txt">3,220 Users (24%)</div>
+                                            <h4 class="por-title">PEP</h4>
+                                            <div class="por-txt">3,220 Cases (24%)</div>
                                             <div class="progress mb-2" style="height: 5px;">
-                                                <div class="progress-bar bg-flat-color-2" role="progressbar"
-                                                    style="width: 24%;" aria-valuenow="25" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-flat-color-2" role="progressbar" style="width: 24%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                         <div class="progress-box progress-2">
-                                            <h4 class="por-title">Unique Visitors</h4>
-                                            <div class="por-txt">29,658 Users (60%)</div>
+                                            <h4 class="por-title">Terrorism</h4>
+                                            <div class="por-txt">29,658 Cases (60%)</div>
                                             <div class="progress mb-2" style="height: 5px;">
-                                                <div class="progress-bar bg-flat-color-3" role="progressbar"
-                                                    style="width: 60%;" aria-valuenow="60" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-flat-color-3" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                         <div class="progress-box progress-2">
-                                            <h4 class="por-title">Targeted Visitors</h4>
-                                            <div class="por-txt">99,658 Users (90%)</div>
+                                            <h4 class="por-title">Sanctions</h4>
+                                            <div class="por-txt">99,658 Cases (90%)</div>
                                             <div class="progress mb-2" style="height: 5px;">
-                                                <div class="progress-bar bg-flat-color-4" role="progressbar"
-                                                    style="width: 90%;" aria-valuenow="90" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-flat-color-4" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                     </div> <!-- /.card-body -->
