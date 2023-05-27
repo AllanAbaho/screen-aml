@@ -42,6 +42,7 @@
         @include('dashboard.custom-header')
 
         <div class="content">
+        @include('messages')
             <div class="animated fadeIn">
                 <div class="row">
                     <div class="col-lg-3 col-md-6">

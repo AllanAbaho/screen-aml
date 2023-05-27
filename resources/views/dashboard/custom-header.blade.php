@@ -93,7 +93,7 @@
 
                     <a class="nav-link" href="#"><i class="fa fa-cog"></i>Settings</a>
 
-                    <a class="nav-link" href="{{ url('/')}}"><i class="fa fa-power-off"></i>Logout</a>
+                    <a class="nav-link" href="{{ route('logout.perform')}}"><i class="fa fa-power-off"></i>Logout</a>
                 </div>
             </div>
         </div>
