@@ -10,8 +10,8 @@
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-    <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
+    <link rel="apple-touch-icon" href="{{asset('assets/backend/images/favicon.JPG') }}">
+    <link rel="shortcut icon" href="{{asset('assets/backend/images/favicon.JPG') }}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -60,7 +60,7 @@
                         </div>
                         <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Sign in</button>
                         <div class="register-link m-t-15 text-center">
-                            <p>Don't have account ? <a style="color:blue" href="{{ route('register.perform') }}"> Sign Up Here</a></p>
+                            <p>Don't have account ? <a style="color:blue" href="{{ route('register.show') }}"> Sign Up Here</a></p>
                         </div>
                     </form>
                 </div>

@@ -2,7 +2,7 @@
 <header id="header" class="header">
     <div class="top-left">
         <div class="navbar-header">
-            <a class="navbar-brand" href="./"><img height="40px" src="https://i.imgur.com/QRAUqs9.png" alt="Logo"> Screen AML</a>
+            <a class="navbar-brand" href="./"><img height="40px" src="{{asset('assets/backend/images/favicon.JPG') }}" alt="Logo"> Screen AML</a>
             <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
         </div>
     </div>

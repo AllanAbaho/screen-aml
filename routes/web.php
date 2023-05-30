@@ -45,17 +45,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
          */
         Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
+        Route::post('/dashboard/search', 'DashboardController@search')->name('dashboard.search');
+        Route::get('/dashboard/search', 'DashboardController@searchForm')->name('dashboard.search-form');
+        Route::get('/dashboard/search-results/{id}', 'DashboardController@searchResults')->name('dashboard.search-results');
 
 
         Route::get('/dashboard/add-credit', function () {
             return view('dashboard/add-credit');
-        });
-        Route::get('/dashboard/search-person', function () {
-            return view('dashboard/search-person');
-        });
-        Route::get('/dashboard/search-company', function () {
-            return view('dashboard/search-company');
-        });
-        
+        });        
     });
 });
