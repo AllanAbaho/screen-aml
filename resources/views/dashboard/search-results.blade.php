@@ -89,13 +89,14 @@
                                                 <th scope="col">Entity Type</th>
                                                 <th scope="col">Countries</th>
                                                 <th scope="col">Categories</th>
+                                                <th scope="col">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             for ($i = 0; $i < count($rows); $i++) :
                                                 $details = $rows[$i]['doc'];
-
+                                                $docId = $details['id'];
                                             ?>
                                                 <tr>
                                                     <th scope="row"><?= $i + 1 ?></th>
@@ -123,6 +124,7 @@
                                                         }
                                                         ?>
                                                     </td>
+                                                    <td><a href="../generate-pdf/{{$searchId}}/{{$docId}}"><i class="fa fa-download"></i>  Download</a></td>
                                                 </tr>
                                             <?php endfor; ?>
                                         </tbody>

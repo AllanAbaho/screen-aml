@@ -48,6 +48,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::post('/dashboard/search', 'DashboardController@search')->name('dashboard.search');
         Route::get('/dashboard/search', 'DashboardController@searchForm')->name('dashboard.search-form');
         Route::get('/dashboard/search-results/{id}', 'DashboardController@searchResults')->name('dashboard.search-results');
+        Route::get('/dashboard/generate-pdf/{searchId}/{docId}', 'DashboardController@generatePDF')->name('dashboard.generate-pdf');
 
 
         Route::get('/dashboard/add-credit', function () {

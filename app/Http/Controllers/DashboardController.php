@@ -7,9 +7,37 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class DashboardController extends Controller
 {
+    public function generatePDF($searchId, $docId)
+    {
+        $results = Searches::find($searchId);
+        $content = json_decode($results['content'], true);
+        $rows = $content['data']['hits'];
+        $pageDetails = [];
+        for ($i = 0; $i < count($rows); $i++) {
+            $details = $rows[$i]['doc'];
+            if ($details['id'] == $docId){
+                $pageDetails = $details;
+                break;
+            }
+        }
+        $data = [
+            'title' => 'Screen AML',
+            'date' => date('m/d/Y'),
+            'pageDetails'=> $pageDetails
+        ];
+
+        // return view('dashboard.pdf', $data);
+
+
+        $pdf = PDF::loadView('dashboard.pdf', $data);
+
+        return $pdf->download( $pageDetails['name'] .'.pdf');
+    }
+
     public function index()
     {
         // $results = Searches::latest()->take(10)->get();
@@ -25,7 +53,10 @@ class DashboardController extends Controller
     public function searchResults($id)
     {
         $results = Searches::find($id);
-        return view('dashboard.search-results', ['results' => $results]);
+        if(!$results){
+            return redirect()->route('dashboard.search');
+        }
+        return view('dashboard.search-results', ['results' => $results,'searchId'=>$id]);
     }
 
     public function search(Request $request)
@@ -41,9 +72,9 @@ class DashboardController extends Controller
                 $post_data = [
                     'search_term' => $search_term,
                     "fuzziness" => 0.6,
-                    "filters"=> [
-                        "entity_type"=> $entity_type,
-                        "types"=> $match_types
+                    "filters" => [
+                        "entity_type" => $entity_type,
+                        "types" => $match_types
                     ],
                 ];
                 $ch = curl_init($url);
