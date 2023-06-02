@@ -48,6 +48,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::post('/dashboard/search', 'DashboardController@search')->name('dashboard.search');
         Route::get('/dashboard/search', 'DashboardController@searchForm')->name('dashboard.search-form');
         Route::get('/dashboard/search-results/{id}', 'DashboardController@searchResults')->name('dashboard.search-results');
+        Route::get('/dashboard/get_business_registration_details/{entity}', 'DashboardController@get_business_registration_details')->name('dashboard.get_business_registration_details');
+        Route::get('/dashboard/accesstkn', 'DashboardController@accesstkn')->name('dashboard.accesstkn');
         Route::get('/dashboard/generate-pdf/{searchId}/{docId}', 'DashboardController@generatePDF')->name('dashboard.generate-pdf');
 
 

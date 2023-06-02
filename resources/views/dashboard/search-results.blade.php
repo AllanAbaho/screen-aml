@@ -88,7 +88,7 @@
                                                 <th scope="col">Full Name</th>
                                                 <th scope="col">Entity Type</th>
                                                 <th scope="col">Countries</th>
-                                                <th scope="col">Categories</th>
+                                                <th scope="col">Sources</th>
                                                 <th scope="col">Action</th>
                                             </tr>
                                         </thead>

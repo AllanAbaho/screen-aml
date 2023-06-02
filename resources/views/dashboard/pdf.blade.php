@@ -11,7 +11,7 @@
   margin-right: auto;
   width: 50%;">
     <img src="{{asset('assets/backend/images/favicon.JPG') }}" height="50px" alt="logo">
-    <h1 style="color:green">{{ $title }}</h1>
+    <h1>{{ $title }}</h1>
     <p>{{ $date }}</p>
     <p><b>Name:</b> <?= $pageDetails['name'] ?></p>
     <p><b>Entity:</b> <?= $pageDetails['entity_type'] ?></p>
@@ -23,6 +23,26 @@
                 if ($field['name'] == 'Countries') {
                     echo ($field['value']);
                 }
+            }
+        }
+        ?>
+    </p>
+    <p> <b>Sources:</b> 
+        <?php
+        $types = $pageDetails['types'] ?? [];
+        if ($types) {
+            foreach ($types as $type) {
+                echo ($type) . ', ';
+            }
+        }
+        ?>
+    </p>
+    <p> <b>Links:</b> <br>
+        <?php
+        $links = $pageDetails['media'] ?? [];
+        if ($links) {
+            foreach ($links as $link) {
+                echo  ($link['url']) . '<br> <br>';
             }
         }
         ?>
