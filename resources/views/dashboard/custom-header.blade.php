@@ -1,5 +1,6 @@
 <!-- Header-->
 <header id="header" class="header">
+<?php use Illuminate\Support\Facades\Auth; ?>
     <div class="top-left">
         <div class="navbar-header">
             <a class="navbar-brand" href="./"><img height="40px" src="{{asset('assets/backend/images/favicon.JPG') }}" alt="Logo"> Screen AML</a>
@@ -9,8 +10,8 @@
     <div class="top-right">
         <div class="header-menu">
             <div class="header-left balance-widget">
-                Balance: UGX 50,000 &nbsp;
-                <a class="btn btn-success" href="{{ url('dashboard/add-credit') }}">Add Credit </a>
+                Balance: UGX <?= Auth::user()->wallet_balance; ?> &nbsp;
+                <a class="btn btn-success" href="{{ route('dashboard.add-credit') }}">Add Credit </a>
                 &nbsp;
                 <div class="dropdown for-notification">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="notification"

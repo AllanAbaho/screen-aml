@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Screen AML - Add Credit</title>
+    <title>Screen AML - My Search Results</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -29,7 +29,6 @@
 
 
 </head>
-<?php use Illuminate\Support\Facades\Auth; ?>
 
 <body>
     <!-- Left Panel -->
@@ -38,7 +37,7 @@
 
     <div id="right-panel" class="right-panel">
 
-    @include('dashboard.custom-header')
+        @include('dashboard.custom-header')
 
         <div class="breadcrumbs">
             <div class="breadcrumbs-inner">
@@ -46,7 +45,7 @@
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>Add Credit</h1>
+                                <h1><span><i class="fa fa-user"></i> My Recent Searches</span></h1>
                             </div>
                         </div>
                     </div>
@@ -54,8 +53,8 @@
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="#">Add Credit</a></li>
-                                    <li class="active">Mobile Money</li>
+                                    <li><a href="#">My Recent</a></li>
+                                    <li class="active">Searches</li>
                                 </ol>
                             </div>
                         </div>
@@ -66,29 +65,47 @@
 
         <div class="content">
             <div class="animated fadeIn">
+                @include('messages')
+
                 <div class="row">
+
                     <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header"><strong>Add Credit</strong><small> Mobile Money</small></div>
+                            <div class="card-header"><strong>My Recent </strong><small>Searches</small></div>
                             <div class="card-body card-block">
-                            <form action="{{ route('dashboard.update-balance') }}" method="post">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                                <div class="form-group">
-                                    <label for="company" class=" form-control-label">Phone Number</label>
-                                    <input type="number" id="company" value="<?= Auth::user()->phone?>" placeholder="Enter recipient phone number" class="form-control" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="company" class=" form-control-label">Amount</label>
-                                    <input type="number" name="amount" id="amount" placeholder="Enter the amount" class="form-control">
-                                </div>
-                                <button type="submit" class="btn btn-success btn-sm">Send</button>
-                                </form>
+<table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Search Name</th>
+                                                <th scope="col">Searcher</th>
+                                                <th scope="col">Date Created</th>
+                                                <th scope="col">View</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            use Illuminate\Support\Facades\Auth;
+                                            for($i=0; $i<count($data['searches']); $i++):   
+                                                ?>
+                                            <tr>
+                                                <th scope="row"><?=$i + 1; ?></th>
+                                                <td><?= $data['searches'][$i]['name']; ?></td>
+                                                <td><?= Auth::user()->email ?></td>
+                                                <td><?= $data['searches'][$i]['created_at']; ?></td>
+                                                <td><a href="search-results/<?= $data['searches'][$i]['id']; ?>"><i class="fa fa-eye"></i>  View</a></td>
+                                            </tr>
 
+                                            <?php endfor; ?>
+                                        </tbody>
+                                    </table>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--?php endif; ?-->
+
             </div><!-- .animated -->
         </div><!-- .content -->
 

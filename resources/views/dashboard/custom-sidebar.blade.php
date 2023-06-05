@@ -8,6 +8,7 @@
                 </li>
                 <li class="menu-title">AML Features</li><!-- /.menu-title -->
                 <li><a href="{{ route('dashboard.search-form') }}"> <i class="menu-icon fa fa-search"></i>Search</a></li>
+                <li><a href="{{ route('dashboard.recent-searches') }}"> <i class="menu-icon fa fa-list"></i>My Searches</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav>

@@ -47,14 +47,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
         Route::post('/dashboard/search', 'DashboardController@search')->name('dashboard.search');
         Route::get('/dashboard/search', 'DashboardController@searchForm')->name('dashboard.search-form');
+        Route::get('/dashboard/add-credit', 'DashboardController@addCredit')->name('dashboard.add-credit');
+        Route::post('/dashboard/update-balance', 'DashboardController@updateBalance')->name('dashboard.update-balance');
         Route::get('/dashboard/search-results/{id}', 'DashboardController@searchResults')->name('dashboard.search-results');
+        Route::get('/dashboard/recent-searches', 'DashboardController@recentSearches')->name('dashboard.recent-searches');
         Route::get('/dashboard/get_business_registration_details/{entity}', 'DashboardController@get_business_registration_details')->name('dashboard.get_business_registration_details');
         Route::get('/dashboard/accesstkn', 'DashboardController@accesstkn')->name('dashboard.accesstkn');
         Route::get('/dashboard/generate-pdf/{searchId}/{docId}', 'DashboardController@generatePDF')->name('dashboard.generate-pdf');
-
-
-        Route::get('/dashboard/add-credit', function () {
-            return view('dashboard/add-credit');
-        });        
     });
 });

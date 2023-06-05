@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Searches;
+use App\Models\User;
+use App\Models\WalletTopups;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Exception;
@@ -41,12 +43,39 @@ class DashboardController extends Controller
     public function index()
     {
         $searchCount = Searches::where('created_by',Auth::id())->count();
-        $searches = Searches::where('created_by',Auth::id())->latest()->take(10)->get();
+        $searches = Searches::where('created_by',Auth::id())->latest()->take(6)->get();
         $data = [
             'searchCount'=>$searchCount,
             'searches'=>$searches,
         ];
         return view('dashboard.index',['data'=>$data]);
+    }
+
+    public function addCredit(){
+        return view('dashboard.add-credit');
+    }
+
+    public function updateBalance(Request $request){
+        $walletTopup = new WalletTopups;
+        $walletTopup->amount = $request->amount;
+        $walletTopup->user_id = Auth::id();
+
+        if($walletTopup->save()){
+            $user = User::find(Auth::id());
+            $user->wallet_balance += $walletTopup->amount;
+            if($user->save()){
+                return redirect()->route('dashboard.index');
+            }
+        }
+    }
+
+    public function recentSearches(){
+        $searches = Searches::where('created_by',Auth::id())->latest()->get();
+        $data = [
+            'searches'=>$searches,
+        ];
+
+        return view('dashboard.recent-searches', ['data' => $data]);
     }
 
     public function searchForm()

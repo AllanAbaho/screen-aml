@@ -50,6 +50,10 @@
                             <input type="email" name="email" class="form-control" placeholder="Email" required>
                         </div>
                         <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
+                        </div>
+                        <div class="form-group">
                             <label>Password</label>
                             <input type="password" name="password" class="form-control" placeholder="Password" required>
                         </div>
