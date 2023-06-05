@@ -93,64 +93,24 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">Full Name</th>
-                                                <th scope="col">Search Type</th>
-                                                <th scope="col">Match Status</th>
+                                                <th scope="col">Search Name</th>
                                                 <th scope="col">Searcher</th>
                                                 <th scope="col">Date Created</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php
+                                            use Illuminate\Support\Facades\Auth;
+                                            for($i=0; $i<count($data['searches']); $i++):   
+                                                ?>
                                             <tr>
-                                                <th scope="row">1</th>
-                                                <td>Robert Kyagulanyi</td>
-                                                <td>Person</td>
-                                                <td>Potential Match</td>
-                                                <td>Oscar Ofumbi</td>
-                                                <td>2023-05-30</td>
+                                                <th scope="row"><?=$i + 1; ?></th>
+                                                <td><?= $data['searches'][$i]['name']; ?></td>
+                                                <td><?= Auth::user()->email ?></td>
+                                                <td><?= $data['searches'][$i]['created_at']; ?></td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Airtel Uganda</td>
-                                                <td>Company</td>
 
-                                                <td>Potential Match</td>
-                                                <td>Oscar Ofumbi</td>
-                                                <td>2023-05-30</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Mukasa Mbidde</td>
-                                                <td>Person</td>
-
-                                                <td>Potential Match</td>
-                                                <td>Oscar Ofumbi</td>
-                                                <td>2023-05-30</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">4</th>
-                                                <td>Insure Small Small</td>
-                                                <td>Company</td>
-                                                <td>No Match</td>
-                                                <td>Oscar Ofumbi</td>
-                                                <td>2023-05-30</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">5</th>
-                                                <td>Allan Abaho</td>
-                                                <td>Person</td>
-                                                <td>No Match</td>
-                                                <td>Oscar Ofumbi</td>
-                                                <td>2023-05-30</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">6</th>
-                                                <td>BLQ Investments</td>
-                                                <td>Company</td>
-                                                <td>Potential Match</td>
-                                                <td>Oscar Ofumbi</td>
-                                                <td>2023-05-30</td>
-                                            </tr>
+                                            <?php endfor; ?>
                                         </tbody>
                                     </table>
                                 </div>

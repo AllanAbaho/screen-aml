@@ -41,9 +41,10 @@ class DashboardController extends Controller
     public function index()
     {
         $searchCount = Searches::where('created_by',Auth::id())->count();
-        // dd($searchCount);
+        $searches = Searches::where('created_by',Auth::id())->latest()->take(10)->get();
         $data = [
-            'searchCount'=>$searchCount
+            'searchCount'=>$searchCount,
+            'searches'=>$searches,
         ];
         return view('dashboard.index',['data'=>$data]);
     }
