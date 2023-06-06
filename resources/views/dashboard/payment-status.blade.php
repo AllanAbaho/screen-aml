@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Screen AML - Add Credit</title>
+    <title>Screen AML - Payment Status</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -29,7 +29,9 @@
 
 
 </head>
-<?php use Illuminate\Support\Facades\Auth; ?>
+<?php
+
+use Illuminate\Support\Facades\Auth; ?>
 
 <body>
     <!-- Left Panel -->
@@ -38,7 +40,7 @@
 
     <div id="right-panel" class="right-panel">
 
-    @include('dashboard.custom-header')
+        @include('dashboard.custom-header')
 
         <div class="breadcrumbs">
             <div class="breadcrumbs-inner">
@@ -46,7 +48,7 @@
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>Add Credit</h1>
+                                <h1>Payment Status</h1>
                             </div>
                         </div>
                     </div>
@@ -54,7 +56,7 @@
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="#">Add Credit</a></li>
+                                    <li><a href="#">Payment Status</a></li>
                                     <li class="active">Mobile Money</li>
                                 </ol>
                             </div>
@@ -69,22 +71,21 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header"><strong>Add Credit</strong><small> Mobile Money</small></div>
+                            <div class="card-header"><strong>Payment Status</strong><small> Mobile Money</small></div>
                             <div class="card-body card-block">
-                            <form action="{{ route('dashboard.collect-payment') }}" method="post">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                <form>
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                                <div class="form-group">
-                                    <label for="company" class=" form-control-label">Phone Number</label>
-                                    <input type="number" id="company" value="<?= Auth::user()->phone?>" placeholder="Enter recipient phone number" class="form-control" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="company" class=" form-control-label">Amount</label>
-                                    <input type="number" name="amount" id="amount" placeholder="Enter the amount" class="form-control">
-                                </div>
-                                <button type="submit" class="btn btn-success btn-sm">Send</button>
+                                    <div class="form-group">
+                                        <label for="company" class=" form-control-label">Phone Number</label>
+                                        <input type="number" id="company" value="<?= Auth::user()->phone ?>" placeholder="Enter recipient phone number" class="form-control" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="company" class=" form-control-label">Amount</label>
+                                        <input type="number" name="amount" id="amount" value="<?= $walletTopup->amount; ?>" placeholder="Enter the amount" class="form-control" readonly>
+                                    </div>
                                 </form>
-
+                                <p>Please enter confirm the pin prompt that was sent to your phone</p>
                             </div>
                         </div>
                     </div>
@@ -104,6 +105,23 @@
         @include('dashboard.custom-footer')
 
     </div><!-- /#right-panel -->
+
+    <script>
+        setInterval(function() {
+            url = '<?= route('dashboard.check-payment-status', ['id' => $walletTopup->id]); ?>';
+            redirectUrl = '<?= route('dashboard.index'); ?>';
+            console.log(url);
+            jQuery.post(url, {
+                    "_token": "{{ csrf_token() }}",
+                },
+                function(response) {
+                    console.log(response);
+                    if (response == 'Received') {
+                        window.location.replace(redirectUrl);
+                    }
+                });
+        }, 10000);
+    </script>
 
     <!-- Right Panel -->
 

@@ -35,8 +35,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
         Route::get('/forgot-password', function () {
             return view('forgot-password');
-        });        
-
+        });  
     });
 
     Route::group(['middleware' => ['auth']], function() {
@@ -48,7 +47,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::post('/dashboard/search', 'DashboardController@search')->name('dashboard.search');
         Route::get('/dashboard/search', 'DashboardController@searchForm')->name('dashboard.search-form');
         Route::get('/dashboard/add-credit', 'DashboardController@addCredit')->name('dashboard.add-credit');
-        Route::post('/dashboard/update-balance', 'DashboardController@updateBalance')->name('dashboard.update-balance');
+        Route::post('/dashboard/collect-payment', 'DashboardController@collectPayment')->name('dashboard.collect-payment');
+        Route::get('/dashboard/payment-status/{id}', 'DashboardController@paymentStatus')->name('dashboard.payment-status');
+        Route::post('/dashboard/payment-status/{id}', 'DashboardController@checkPaymentStatus')->name('dashboard.check-payment-status');
         Route::get('/dashboard/search-results/{id}', 'DashboardController@searchResults')->name('dashboard.search-results');
         Route::get('/dashboard/recent-searches', 'DashboardController@recentSearches')->name('dashboard.recent-searches');
         Route::get('/dashboard/get_business_registration_details/{entity}', 'DashboardController@get_business_registration_details')->name('dashboard.get_business_registration_details');

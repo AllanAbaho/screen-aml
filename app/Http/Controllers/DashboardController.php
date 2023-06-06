@@ -21,7 +21,7 @@ class DashboardController extends Controller
         $pageDetails = [];
         for ($i = 0; $i < count($rows); $i++) {
             $details = $rows[$i]['doc'];
-            if ($details['id'] == $docId){
+            if ($details['id'] == $docId) {
                 $pageDetails = $details;
                 break;
             }
@@ -29,7 +29,7 @@ class DashboardController extends Controller
         $data = [
             'title' => 'Screen AML',
             'date' => date('m/d/Y'),
-            'pageDetails'=> $pageDetails
+            'pageDetails' => $pageDetails
         ];
 
         // return view('dashboard.pdf', $data);
@@ -37,42 +37,52 @@ class DashboardController extends Controller
 
         $pdf = PDF::loadView('dashboard.pdf', $data);
 
-        return $pdf->download( $pageDetails['name'] .'.pdf');
+        return $pdf->download($pageDetails['name'] . '.pdf');
     }
 
     public function index()
     {
-        $searchCount = Searches::where('created_by',Auth::id())->count();
-        $searches = Searches::where('created_by',Auth::id())->latest()->take(6)->get();
+        $searchCount = Searches::where('created_by', Auth::id())->count();
+        $searches = Searches::where('created_by', Auth::id())->latest()->take(6)->get();
         $data = [
-            'searchCount'=>$searchCount,
-            'searches'=>$searches,
+            'searchCount' => $searchCount,
+            'searches' => $searches,
         ];
-        return view('dashboard.index',['data'=>$data]);
+        return view('dashboard.index', ['data' => $data]);
     }
 
-    public function addCredit(){
+    public function addCredit()
+    {
         return view('dashboard.add-credit');
     }
 
-    public function updateBalance(Request $request){
-        $walletTopup = new WalletTopups;
-        $walletTopup->amount = $request->amount;
-        $walletTopup->user_id = Auth::id();
-
-        if($walletTopup->save()){
-            $user = User::find(Auth::id());
-            $user->wallet_balance += $walletTopup->amount;
-            if($user->save()){
-                return redirect()->route('dashboard.index');
-            }
+    public function updateBalance(Request $request)
+    {
+        $phone = $request->phonenumber;
+        $user = User::where('phone', '0'.ltrim($phone,'+256'))->first();
+        if(!$user){
+            return response('No user found');
+        }
+        $amount = intval($request->amount);
+        $walletTopup = WalletTopups::where('user_id',$user->id)->where('amount',$amount)->where('status','new')->first();
+        if($walletTopup){
+            $walletTopup->status = 'Received';
+            if ($walletTopup->save()) {
+                $user->wallet_balance += $walletTopup->amount;
+                $user->save();
+                return response('Transaction updated successfully');
+            }    
+        }else{
+            Log::info('No transaction found');
+            return response('No transaction found');
         }
     }
 
-    public function recentSearches(){
-        $searches = Searches::where('created_by',Auth::id())->latest()->get();
+    public function recentSearches()
+    {
+        $searches = Searches::where('created_by', Auth::id())->latest()->get();
         $data = [
-            'searches'=>$searches,
+            'searches' => $searches,
         ];
 
         return view('dashboard.recent-searches', ['data' => $data]);
@@ -86,10 +96,10 @@ class DashboardController extends Controller
     public function searchResults($id)
     {
         $results = Searches::find($id);
-        if(!$results){
+        if (!$results) {
             return redirect()->route('dashboard.search');
         }
-        return view('dashboard.search-results', ['results' => $results,'searchId'=>$id]);
+        return view('dashboard.search-results', ['results' => $results, 'searchId' => $id]);
     }
 
     public function search(Request $request)
@@ -148,65 +158,149 @@ class DashboardController extends Controller
         }
     }
 
-    public function accesstkn()
+    public function paymentStatus(Request $request)
     {
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-uat.integration.go.ug/token',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_SSL_VERIFYHOST => FALSE,
-            CURLOPT_SSL_VERIFYPEER => FALSE,
-            CURLOPT_POSTFIELDS => 'grant_type=client_credentials',
-            CURLOPT_HTTPHEADER => array(
-              'Authorization: Basic M0M1T2h6NU13ZDhBMmZ1al91X3FqRUF6RmwwYToySV9Lc21wcVBSNk9zaUlLbFRMc01INlk1a2th',
-              'Content-Type: application/x-www-form-urlencoded'
-            ),
-        ));
-    
-        $response = curl_exec($curl);
-        if (curl_errno($curl)) {
-            $error_msg = curl_error($curl);
-            Log::info('Search Curl Error', [$error_msg]);
-            return response(['status' => 'failure', 'message' => $error_msg]);
+        $id = $request->id;
+        $walletTopup = WalletTopups::find($id);
+        return view('dashboard.payment-status', ['walletTopup' => $walletTopup]);
+    }
+
+    public function checkPaymentStatus(Request $request)
+    {
+        $id = $request->id;
+        $walletTopup = WalletTopups::find($id);
+        return $walletTopup->status;
+    }
+    public function collectPayment(Request $request)
+    {
+        try {
+            Log::info('Collect Payment Request', [$request]);
+            $amount = $request->amount;
+            if (isset($amount)) {
+                $url = env('BEYONIC_API') . '/collectionrequests';
+                $post_data = [
+                    "phonenumber" => "256" . ltrim(Auth::user()->phone, "0"),
+                    'amount' => $amount,
+                    'currency' => 'UGX',
+                    "reason" => "Wallet top up with screen aml",
+                    "success_message" => "Screen AML: Thank you for choosing us",
+                    "send_instructions" => True
+                ];
+                $ch = curl_init($url);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+                curl_setopt($ch, CURLOPT_TIMEOUT, 0);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization: Token ' . env('BEYONIC_API_KEY')));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                $result = curl_exec($ch);
+                // dd($result);
+                if (curl_errno($ch)) {
+                    $error_msg = curl_error($ch);
+                    Log::info('Collect Payment Curl Error', [$error_msg]);
+                    return response(['status' => 'failure', 'message' => $error_msg]);
+                }
+                curl_close($ch);
+                $result = (json_decode($result, true));
+                Log::info('Collect Payment Response', [$result]);
+                if ($result['status'] == 'new') {
+
+                    $walletTopup = new WalletTopups;
+                    $walletTopup->amount = $amount;
+                    $walletTopup->user_id = Auth::id();
+                    $walletTopup->status = $result['status'];
+                    if ($walletTopup->save()) {
+                        $walletTopup->save();
+                        return redirect()->route('dashboard.payment-status', ['id' => $walletTopup->id])->with('message', 'Please enter pin to confirm payment');
+                    }
+                    return response(['status' => $result['status'], 'content' => $result['content']]);
+                } else {
+                    return response(['status' => $result['status'], 'message' => $result['message']]);
+                }
+            } else {
+                return response(['status' => 'failure', 'message' => 'Invalid request, some parameters were not passed in the payload.']);
+            }
+        } catch (Exception $e) {
+            Log::info('Search Exception Error', [$e->getMessage()]);
+            return response(['status' => 'failure', 'message' => $e->getMessage()]);
         }
-curl_close($curl);
-        $json = json_decode($response, true);
-
-        return $json['access_token'];
     }
 
-    public function get_business_registration_details($brn)
-    {
-        $access = $this->accesstkn();
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-uat.integration.go.ug/t/ursb.go.ug/ursb-brs-api/1.0.0/entity/get_entity_full/'.$brn.'/-/APS-NITA',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_SSL_VERIFYHOST => FALSE,
-            CURLOPT_SSL_VERIFYPEER => FALSE,
-            CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer '.$access
-            ),
-        ));
+    // public function webHook($id){
+    //     $url = env('BEYONIC_API') . '/webhooks';
+    //     $post_data = [
+    //         'event' => 'collection.received',
+    //         // 'target' => route('dashboard.update-balance',['id'=>$id])
+    //         'target' => 'https://aml.smithandboltons.com/dashboard/update-balance/'.$id
+    //     ];
+    //     $ch = curl_init($url);
+    //     curl_setopt($ch, CURLOPT_POST, 1);
+    //     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+    //     curl_setopt($ch, CURLOPT_TIMEOUT, 0);
+    //     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization: Token ' . env('BEYONIC_API_KEY')));
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    //     $result = curl_exec($ch);
+    //     return $result;
+    // }
 
-        $response = curl_exec($curl);
+    // public function accesstkn()
+    // {
+    //     $curl = curl_init();
+    //     curl_setopt_array($curl, array(
+    //         CURLOPT_URL => 'https://api-uat.integration.go.ug/token',
+    //         CURLOPT_RETURNTRANSFER => true,
+    //         CURLOPT_ENCODING => '',
+    //         CURLOPT_MAXREDIRS => 10,
+    //         CURLOPT_TIMEOUT => 0,
+    //         CURLOPT_FOLLOWLOCATION => true,
+    //         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //         CURLOPT_CUSTOMREQUEST => 'POST',
+    //         CURLOPT_SSL_VERIFYHOST => FALSE,
+    //         CURLOPT_SSL_VERIFYPEER => FALSE,
+    //         CURLOPT_POSTFIELDS => 'grant_type=client_credentials',
+    //         CURLOPT_HTTPHEADER => array(
+    //             'Authorization: Basic M0M1T2h6NU13ZDhBMmZ1al91X3FqRUF6RmwwYToySV9Lc21wcVBSNk9zaUlLbFRMc01INlk1a2th',
+    //             'Content-Type: application/x-www-form-urlencoded'
+    //         ),
+    //     ));
 
-        curl_close($curl);
-        $xml = simplexml_load_string($response, "SimpleXMLElement", LIBXML_NOCDATA);
-        $json = json_encode($xml);
-        $array = json_decode($json,TRUE);
-        return $array;
-    }
+    //     $response = curl_exec($curl);
+    //     if (curl_errno($curl)) {
+    //         $error_msg = curl_error($curl);
+    //         Log::info('Search Curl Error', [$error_msg]);
+    //         return response(['status' => 'failure', 'message' => $error_msg]);
+    //     }
+    //     curl_close($curl);
+    //     $json = json_decode($response, true);
+
+    //     return $json['access_token'];
+    // }
+
+    // public function get_business_registration_details($brn)
+    // {
+    //     $access = $this->accesstkn();
+    //     $curl = curl_init();
+    //     curl_setopt_array($curl, array(
+    //         CURLOPT_URL => 'https://api-uat.integration.go.ug/t/ursb.go.ug/ursb-brs-api/1.0.0/entity/get_entity_full/' . $brn . '/-/APS-NITA',
+    //         CURLOPT_RETURNTRANSFER => true,
+    //         CURLOPT_ENCODING => '',
+    //         CURLOPT_MAXREDIRS => 10,
+    //         CURLOPT_TIMEOUT => 0,
+    //         CURLOPT_FOLLOWLOCATION => true,
+    //         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //         CURLOPT_CUSTOMREQUEST => 'GET',
+    //         CURLOPT_SSL_VERIFYHOST => FALSE,
+    //         CURLOPT_SSL_VERIFYPEER => FALSE,
+    //         CURLOPT_HTTPHEADER => array(
+    //             'Authorization: Bearer ' . $access
+    //         ),
+    //     ));
+
+    //     $response = curl_exec($curl);
+
+    //     curl_close($curl);
+    //     $xml = simplexml_load_string($response, "SimpleXMLElement", LIBXML_NOCDATA);
+    //     $json = json_encode($xml);
+    //     $array = json_decode($json, TRUE);
+    //     return $array;
+    // }
 }
