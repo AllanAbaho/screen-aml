@@ -58,12 +58,17 @@ class DashboardController extends Controller
 
     public function updateBalance(Request $request)
     {
-        $phone = $request->phonenumber;
+        Log::info('Collect Payment Response', [$request]);
+
+        $data = $request->data;
+        Log::info([$data['amount'],$data['phonenumber']]);        
+
+        $phone = $data['phonenumber'];
         $user = User::where('phone', '0'.ltrim($phone,'+256'))->first();
         if(!$user){
             return response('No user found');
         }
-        $amount = intval($request->amount);
+        $amount = intval($data['amount']);
         $walletTopup = WalletTopups::where('user_id',$user->id)->where('amount',$amount)->where('status','new')->first();
         if($walletTopup){
             $walletTopup->status = 'Received';
@@ -193,7 +198,7 @@ class DashboardController extends Controller
                 curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization: Token ' . env('BEYONIC_API_KEY')));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 $result = curl_exec($ch);
-                // dd($result);
+                dd($result);
                 if (curl_errno($ch)) {
                     $error_msg = curl_error($ch);
                     Log::info('Collect Payment Curl Error', [$error_msg]);

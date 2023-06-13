@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2023 at 11:30 AM
+-- Generation Time: Jun 13, 2023 at 08:21 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -54,10 +54,10 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2019_12_14_000001_create_personal_access_tokens_table', 1);
+(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(5, '2014_10_12_000000_create_users_table', 2);
 
 -- --------------------------------------------------------
 
@@ -92,18 +92,73 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `searches`
+--
+
+CREATE TABLE `searches` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`content`)),
+  `created_at` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wallet_balance` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `phone`, `wallet_balance`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'abahoallans@gmail.com', '0700460055', '300', NULL, '$2y$10$zf96BUFGCqiWYL6u0ylB/O0SMUpK41MI/aa8P1wpFekQsjyyXkAU6', NULL, '2023-06-06 05:33:52', '2023-06-06 10:10:41');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wallet_topups`
+--
+
+CREATE TABLE `wallet_topups` (
+  `id` int(11) NOT NULL,
+  `amount` varchar(10) DEFAULT NULL,
+  `status` varchar(100) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `wallet_topups`
+--
+
+INSERT INTO `wallet_topups` (`id`, `amount`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
+(2, '700', 'Received', 1, '2023-06-06 10:52:35', '2023-06-06 13:09:17'),
+(3, '300', 'Received', 1, '2023-06-06 10:54:04', '2023-06-06 13:10:41'),
+(4, '400', 'Received', 1, '2023-06-06 11:04:41', '2023-06-06 11:04:41'),
+(5, '100', 'new', 1, '2023-06-06 12:19:34', '2023-06-06 12:19:34'),
+(6, '100', 'new', 1, '2023-06-06 12:20:02', '2023-06-06 12:20:02'),
+(7, '100', 'new', 1, '2023-06-06 12:23:10', '2023-06-06 12:23:10'),
+(8, '330', 'new', 1, '2023-06-06 12:23:55', '2023-06-06 12:23:55'),
+(9, '330', 'new', 1, '2023-06-06 12:24:20', '2023-06-06 12:24:20'),
+(10, '440', 'new', 1, '2023-06-06 12:51:29', '2023-06-06 12:51:29');
 
 --
 -- Indexes for dumped tables
@@ -137,11 +192,24 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `searches`
+--
+ALTER TABLE `searches`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD UNIQUE KEY `users_phone_unique` (`phone`);
+
+--
+-- Indexes for table `wallet_topups`
+--
+ALTER TABLE `wallet_topups`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -157,7 +225,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -166,10 +234,22 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `searches`
+--
+ALTER TABLE `searches`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `wallet_topups`
+--
+ALTER TABLE `wallet_topups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
