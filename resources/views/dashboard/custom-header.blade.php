@@ -3,7 +3,7 @@
 <?php use Illuminate\Support\Facades\Auth; ?>
     <div class="top-left">
         <div class="navbar-header">
-            <a class="navbar-brand" href="./"><img height="40px" src="{{asset('assets/backend/images/favicon.JPG') }}" alt="Logo"> Screen AML</a>
+            <a class="navbar-brand" href="./"><img height="40px" src="{{asset('assets/backend/images/favicon.JPG') }}" alt="Logo"> KYC UGANDA</a>
             <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
         </div>
     </div>

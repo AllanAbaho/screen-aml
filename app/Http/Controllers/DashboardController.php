@@ -27,7 +27,7 @@ class DashboardController extends Controller
             }
         }
         $data = [
-            'title' => 'Screen AML',
+            'title' => 'KYC UGANDA',
             'date' => date('m/d/Y'),
             'pageDetails' => $pageDetails
         ];
@@ -187,8 +187,8 @@ class DashboardController extends Controller
                     "phonenumber" => "256" . ltrim(Auth::user()->phone, "0"),
                     'amount' => $amount,
                     'currency' => 'UGX',
-                    "reason" => "Wallet top up with screen aml",
-                    "success_message" => "Screen AML: Thank you for choosing us",
+                    "reason" => "Wallet top up with KYC UGANDA",
+                    "success_message" => "KYC UGANDA: Thank you for choosing us",
                     "send_instructions" => True
                 ];
                 $ch = curl_init($url);
