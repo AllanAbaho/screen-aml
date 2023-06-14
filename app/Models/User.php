@@ -22,6 +22,9 @@ class User extends Authenticatable
         'phone',
         'password',
         'wallet_balance',
+        'company',
+        'category',
+        'role'
     ];
 
     /**

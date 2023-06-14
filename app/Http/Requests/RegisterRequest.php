@@ -26,8 +26,19 @@ class RegisterRequest extends FormRequest
         return [
             'email' => 'required|email:rfc,dns|unique:users,email',
             'phone' => 'required|unique:users,phone',
+            'category' => 'required',
+            'company' => 'required',
             'password' => 'required|min:8',
-            'password_confirmation' => 'required|same:password'
+            'password_confirmation' => 'required|same:password',
+            'captcha' => 'required|captcha',
+            'role' => 'required' 
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'captcha.captcha'=>'Invalid captcha code.',
         ];
     }
 }

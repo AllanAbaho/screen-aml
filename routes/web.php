@@ -26,6 +26,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
          */
         Route::get('/register', 'RegisterController@show')->name('register.show');
         Route::post('/register', 'RegisterController@register')->name('register.perform');
+        Route::get('/register/refresh_captcha', 'RegisterController@refreshCaptcha')->name('register.refresh_captcha');
 
         /**
          * Login Routes

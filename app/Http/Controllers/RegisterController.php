@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
@@ -24,13 +25,20 @@ class RegisterController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function register(RegisterRequest $request) 
+    public function register(RegisterRequest $request)
     {
-        $user = User::create($request->validated());
-
-        // auth()->login($user);
+        User::create($request->validated());
 
         return redirect('login')->with('success', "Account successfully registered. Please login");
     }
 
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function refreshCaptcha()
+    {
+        return response()->json(['captcha' => captcha_img()]);
+    }
 }

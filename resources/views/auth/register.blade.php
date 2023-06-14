@@ -26,13 +26,13 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 
 <body class="bg-dark">
 
     <div class="sufee-login d-flex align-content-center flex-wrap">
-        <div class="container" style="padding-top: 2%;">
+        <div class="container">
             <div class="login-content">
                 <div class="login-logo">
                     <h3 style="color:#fff; text-align:center; "> <strong> REGISTER</strong></h3>
@@ -41,8 +41,39 @@
                 </div>
                 <div class="login-form">
                     <form action="{{ route('register.perform') }}" method="post">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    <input type="hidden" name="role" value="Client" />
 
+                        <div class="form-group">
+                            <label for="entity-type" class=" form-control-label">Category</label>
+
+                            <select name="category" class="form-control" tabindex="1">
+                                <option value="Advocates">Advocates</option>
+                                <option value="Accountant">Accountant</option>
+                                <option value="Trust Company">Trust Company</option>
+                                <option value="Casino">Casino</option>
+                                <option value="Real Estate Agents">Real Estate Agents</option>
+                                <option value="Insurance company">Insurance company</option>
+                                <option value="Registrar of companies">Registrar of companies</option>
+                                <option value="Uganda investment authority">Uganda investment authority</option>
+                                <option value="Licensing Authority">Licensing Authority</option>
+                                <option value="Bank">Bank</option>
+                                <option value="Financial Guarantors">Financial Guarantors</option>
+                                <option value="NGO">NGO</option>
+                                <option value="VASP">VASP</option>
+                                <option value="Broker, dealer, investment adviser">Broker, dealer, investment adviser</option>
+                                <option value="Trust and Company service providers">Trust and Company service providers</option>
+                                <option value="Dealers in precious metals and gems">Dealers in precious metals and gems</option>
+                                <option value="Microfinance">Microfinance</option>
+                                <option value="Money transfer company">Money transfer company</option>
+                                <option value="Forex bureau">Forex bureau</option>
+                                <option value="Mobile Money">Mobile Money</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Company Name</label>
+                            <input type="text" name="company" class="form-control" placeholder="Company Name" required>
+                        </div>
                         <div class="form-group">
                             <label>Email address</label>
                             <input type="email" name="email" class="form-control" placeholder="Email" required>
@@ -58,6 +89,23 @@
                         <div class="form-group">
                             <label>Confirm Password</label>
                             <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
+                        </div>
+                        <div class="form-group{{ $errors->has('captcha') ? ' has-error' : '' }}">
+                            <label>Captcha</label>
+                            <div class="row">
+                                <div class="col-md-4 captcha">
+                                    <span>{!! captcha_img() !!}</span>
+                                </div>
+                                <div class="col-md-8">
+                                    <button type="button" class="btn btn-success btn-refresh"><i class="fa fa-refresh"></i> Refresh</button>
+                                </div>
+                            </div><br>
+                            <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha" required>
+                            @if ($errors->has('captcha'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('captcha') }}</strong>
+                            </span>
+                            @endif
                         </div>
 
                         <div class="checkbox">
@@ -80,6 +128,18 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $(".btn-refresh").click(function() {
+            $.ajax({
+                type: 'GET',
+                url: '<?= route('register.refresh_captcha') ?>',
+                success: function(data) {
+                    $(".captcha span").html(data.captcha);
+                }
+            });
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>

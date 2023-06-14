@@ -12,11 +12,10 @@
   <!-- Favicons -->
   <link href="{{ asset('assets/frontend/img/favicon.JPG') }}" rel="icon">
   <link href="{{ asset('assets/frontend/img/apple-touch-icon.png+') }}" rel="apple-touch-icon">
-
+  <script src="https://www.google.com/recaptcha/api.js" async defer>
+  </script>
   <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <!-- {{ URL::asset('assets/vendor/aos/aos.css'); }}  -->
@@ -71,13 +70,12 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center">
-          <h1 data-aos="fade-up">No matter where your business grows</h1>
+          <h1 data-aos="fade-up">Let's make KYC, Easy, Affordable and Predictable </h1>
           <h2 data-aos="fade-up" data-aos-delay="400">Our Anti Money Laundering Professionals are working hard, behind
             the scenes to assure your regulator - all is well</h2>
           <div data-aos="fade-up" data-aos-delay="600">
             <div class="text-center text-lg-start">
-              <a href="#about"
-                class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+              <a href="#about" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
                 <span>Get Started</span>
                 <i class="bi bi-arrow-right"></i>
               </a>
@@ -103,12 +101,9 @@
             <div class="content">
               <h2>Why Choose Us</h2>
               <ul>
-                <li>Dedicated to AML/CFT/PF Compliance since 2011.</li>
-                <li>We know our local AML/CFT Regulatory environment very well</li>
-                <li>Preferred by global companies entering the local market.</li>
-                <li>As founding member, sponsors, and host the Anti-money Laundering Practitioners Association AMLPAL
-                </li>
-                <li> ACAMS authorised partners for Uganda.</li>
+                <li>KYC compliance can be difficult.</li>
+                <li>It is expensive and complicated</li>
+                <li>How about a PAY-AS-YOU- GO Option</li>
               </ul> <br>
 
               <h2>Core values</h2>
@@ -119,8 +114,7 @@
                 <li>We Innovate</li>
               </ul>
               <div class="text-center text-lg-start">
-                <a href="#values"
-                  class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+                <a href="#values" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
                   <span>Read More</span>
                   <i class="bi bi-arrow-right"></i>
                 </a>
@@ -152,17 +146,23 @@
           <div class="col-lg-3" data-aos="fade-up" data-aos-delay="200">
             <div class="box">
               <a href="#contact"><img src="{{ asset('assets/frontend/img/values-1.png') }}" class="img-fluid" alt=""></a>
-              <a href="#contact"><h3>AML Advise</h3></a>
-              <p>Take advantage of our experience to navigate the local AML/CFT Regulatory landscape.</p>
-
+              <a href="#contact">
+                <h3>Global Sanctions and Watchlists</h3>
+              </a>
+              <p>We monitor hundreds of interdependent sanctions lists concurrently in near real-time.
+                Thousands of government, regulatory and law enforcement watchlists.
+                Latest updates in 15 minutes
+              </p>
             </div>
           </div>
 
           <div class="col-lg-3 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
             <div class="box">
               <a href="#contact"><img src="{{ asset('assets/frontend/img/values-2.png') }}" class="img-fluid" alt=""></a>
-              <a href="#contact"><h3>AML Audits</h3></a>
-              <p>Give your AML/CFT program an Independent Review</p>
+              <a href="#contact">
+                <h3>Politically Exposed Persons</h3>
+              </a>
+              <p>Global coverage with over 5,000 structured sources used for our PEP database. Including spouses, partners, and children. </p>
 
             </div>
           </div>
@@ -170,19 +170,20 @@
           <div class="col-lg-3 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">
             <div class="box">
               <a href="{{ route('login.show') }}"><img src="{{ asset('assets/frontend/img/values-3.png') }}" class="img-fluid" alt=""></a>
-              <a href="{{ route('login.show') }}"><h3> AML Technology</h3></a>
-              <p>Customer Risk Profiles change frequently. Take advantage of curated local and global databases to
-                complement your AML/CFT KYC & Continuous Monitoring obligations.</p>
-
+              <a href="{{ route('login.show') }}">
+                <h3> Adverse Media and Information</h3>
+              </a>
+              <p>Rich, dynamic information from millions of newspapers, social media data points. Conduct ongoing monitoring with real-time updates</p>
             </div>
           </div>
 
           <div class="col-lg-3" data-aos="fade-up" data-aos-delay="200">
             <div class="box">
               <a href="#contact"><img src="{{ asset('assets/frontend/img/values-1.png') }}" class="img-fluid" alt=""></a>
-              <a href="#contact"><h3>Transaction Clinic</h3></a>
-              <p>STRs are a Regulatory Reporting Obligation 
-                Review and Discover missed Regulatory Reporting incidents before a Regulatory Sanction or Fine</p>
+              <a href="#contact">
+                <h3>ID Verification</h3>
+              </a>
+              <p>With our ID checking system, you can confirm and verify an individual's national identification number and particulars</p>
 
             </div>
           </div>
@@ -204,8 +205,7 @@
             <div class="count-box">
               <i class="bi bi-emoji-smile"></i>
               <div>
-                <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1"
-                  class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
                 <p>Happy Clients</p>
               </div>
             </div>
@@ -215,8 +215,7 @@
             <div class="count-box">
               <i class="bi bi-journal-richtext" style="color: #ee6c20;"></i>
               <div>
-                <span data-purecounter-start="0" data-purecounter-end="3" data-purecounter-duration="1"
-                  class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end="3" data-purecounter-duration="1" class="purecounter"></span>
                 <p>Countries</p>
               </div>
             </div>
@@ -226,8 +225,7 @@
             <div class="count-box">
               <i class="bi bi-headset" style="color: #15be56;"></i>
               <div>
-                <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1"
-                  class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
                 <p>Hours Of Support</p>
               </div>
             </div>
@@ -237,8 +235,7 @@
             <div class="count-box">
               <i class="bi bi-people" style="color: #bb0852;"></i>
               <div>
-                <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1"
-                  class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
                 <p>AML Professionals</p>
               </div>
             </div>
@@ -299,7 +296,7 @@
           <div class="col-lg-6">
             <form class="php-email-form" action="mail.php" method="POST">
               <div class="row gy-4">
-              <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
                 <div class="col-md-6">
                   <input type="text" name="name" class="form-control" placeholder="Your Name" required>
@@ -315,6 +312,8 @@
 
                 <div class="col-md-12">
                   <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                </div>
+                <div class="g-recaptcha col-md-12" data-sitekey="6Lfdg5cmAAAAAJhzEwGAcWeqZQSrFmfA0Z_eBy1O" data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaResponseExpiry" data-error-callback="onRecaptchaError">
                 </div>
 
                 <div class="col-md-12 text-center">
@@ -386,17 +385,18 @@
               <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
               <li><i class="bi bi-chevron-right"></i> <a href="#about">About us</a></li>
               <li><i class="bi bi-chevron-right"></i> <a href="#values">Services</a></li>
-             <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
             </ul>
           </div>
 
           <div class="col-lg-2 col-6 footer-links">
             <h4>Our Services</h4>
             <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#values">AML Advice</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#values">AML Audits</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#values">AML Technology</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#values">Transaction Clinic</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#values">Global Sanctions</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#values">Politically Exposed Persons</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#values">Adverse Media</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#values">ID Verification</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#values">Benefitial Owner Checks</a></li>
             </ul>
           </div>
 
@@ -404,7 +404,7 @@
             <h4>Contact Us</h4>
 
             <p>
-              Smith and Bolton Limited,  <br>
+              Smith and Bolton Limited, <br>
               P.O Box 118419 Kampala, <br>
               1st Floor Suite 2, <br> Suzie House, Nsambya
 
@@ -433,8 +433,7 @@
     </div>
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="{{ asset('assets/frontend/vendor/purecounter/purecounter_vanilla.js') }}"></script>

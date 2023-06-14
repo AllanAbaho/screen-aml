@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2023 at 08:21 AM
+-- Generation Time: Jun 14, 2023 at 11:03 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -113,6 +113,9 @@ CREATE TABLE `searches` (
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `role` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `wallet_balance` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
@@ -127,8 +130,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `phone`, `wallet_balance`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'abahoallans@gmail.com', '0700460055', '300', NULL, '$2y$10$zf96BUFGCqiWYL6u0ylB/O0SMUpK41MI/aa8P1wpFekQsjyyXkAU6', NULL, '2023-06-06 05:33:52', '2023-06-06 10:10:41');
+INSERT INTO `users` (`id`, `role`, `category`, `company`, `email`, `phone`, `wallet_balance`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(4, 'Client', 'accountant', 'Pivot Payments', 'abaho@gmail.com', '12345678', '0', NULL, '$2y$10$n6ir.PkMK3UzwVdjVd/inOkqqWZUck7GgMPKzBK9v2qvBFPhWZMMq', NULL, '2023-06-14 05:32:17', '2023-06-14 05:32:17');
 
 -- --------------------------------------------------------
 
@@ -144,21 +147,6 @@ CREATE TABLE `wallet_topups` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `wallet_topups`
---
-
-INSERT INTO `wallet_topups` (`id`, `amount`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
-(2, '700', 'Received', 1, '2023-06-06 10:52:35', '2023-06-06 13:09:17'),
-(3, '300', 'Received', 1, '2023-06-06 10:54:04', '2023-06-06 13:10:41'),
-(4, '400', 'Received', 1, '2023-06-06 11:04:41', '2023-06-06 11:04:41'),
-(5, '100', 'new', 1, '2023-06-06 12:19:34', '2023-06-06 12:19:34'),
-(6, '100', 'new', 1, '2023-06-06 12:20:02', '2023-06-06 12:20:02'),
-(7, '100', 'new', 1, '2023-06-06 12:23:10', '2023-06-06 12:23:10'),
-(8, '330', 'new', 1, '2023-06-06 12:23:55', '2023-06-06 12:23:55'),
-(9, '330', 'new', 1, '2023-06-06 12:24:20', '2023-06-06 12:24:20'),
-(10, '440', 'new', 1, '2023-06-06 12:51:29', '2023-06-06 12:51:29');
 
 --
 -- Indexes for dumped tables
@@ -243,7 +231,7 @@ ALTER TABLE `searches`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `wallet_topups`
