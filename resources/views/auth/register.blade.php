@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="assets/backend/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="assets/backend/css/style.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer>
+  </script>
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -90,23 +92,7 @@
                             <label>Confirm Password</label>
                             <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
                         </div>
-                        <div class="form-group{{ $errors->has('captcha') ? ' has-error' : '' }}">
-                            <label>Captcha</label>
-                            <div class="row">
-                                <div class="col-md-4 captcha">
-                                    <span>{!! captcha_img() !!}</span>
-                                </div>
-                                <div class="col-md-8">
-                                    <button type="button" class="btn btn-success btn-refresh"><i class="fa fa-refresh"></i> Refresh</button>
-                                </div>
-                            </div><br>
-                            <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha" required>
-                            @if ($errors->has('captcha'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('captcha') }}</strong>
-                            </span>
-                            @endif
-                        </div>
+                        <div class="g-recaptcha form-group" data-sitekey="6LcbjpcmAAAAAEMH-rPm-7O08kFINeHflFbqW2Rd" data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaResponseExpiry" data-error-callback="onRecaptchaError"></div>
 
                         <div class="checkbox">
                             <label>

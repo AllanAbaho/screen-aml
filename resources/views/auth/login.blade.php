@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="assets/backend/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="assets/backend/css/style.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer>
+  </script>
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -51,6 +53,7 @@
                             <label>Password</label>
                             <input type="password" name="password" class="form-control" placeholder="Password" required>
                         </div>
+                        <div class="g-recaptcha form-group" data-sitekey="6LcbjpcmAAAAAEMH-rPm-7O08kFINeHflFbqW2Rd" data-callback="recaptchaCallback" data-expired-callback="onRecaptchaResponseExpiry" data-error-callback="onRecaptchaError"></div>
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox"> Remember Me
@@ -60,7 +63,7 @@
                             </label>
 
                         </div>
-                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Sign in</button>
+                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30" id="submitBtn" disabled>Sign in</button>
                         <div class="register-link m-t-15 text-center">
                             <p>Don't have account ? <a style="color:blue" href="{{ route('register.show') }}"> Sign Up Here</a></p>
                         </div>
@@ -70,6 +73,12 @@
 
         </div>
     </div>
+
+    <script type="text/javascript">
+        function recaptchaCallback() {
+    $('#submitBtn').removeAttr('disabled');
+};
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
