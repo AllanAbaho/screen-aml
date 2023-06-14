@@ -30,15 +30,15 @@ class RegisterRequest extends FormRequest
             'company' => 'required',
             'password' => 'required|min:8',
             'password_confirmation' => 'required|same:password',
-            'captcha' => 'required|captcha',
+            // 'captcha' => 'required|captcha',
             'role' => 'required' 
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'captcha.captcha'=>'Invalid captcha code.',
-        ];
-    }
+    // public function messages()
+    // {
+    //     return [
+    //         'captcha.captcha'=>'Invalid captcha code.',
+    //     ];
+    // }
 }

@@ -32,13 +32,13 @@ class RegisterController extends Controller
         return redirect('login')->with('success', "Account successfully registered. Please login");
     }
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function refreshCaptcha()
-    {
-        return response()->json(['captcha' => captcha_img()]);
-    }
+    // /**
+    //  * Create a new controller instance.
+    //  *
+    //  * @return void
+    //  */
+    // public function refreshCaptcha()
+    // {
+    //     return response()->json(['captcha' => captcha_img()]);
+    // }
 }

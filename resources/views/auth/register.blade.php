@@ -99,7 +99,7 @@
                                 <input type="checkbox"> Agree the terms and policy
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Register</button>
+                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30" id="submitBtn" disabled>Register</button>
                         <!-- <div class="social-login-content">
                             <div class="social-button">
                                 <button type="button" class="btn social facebook btn-flat btn-addon mb-3"><i class="ti-facebook"></i>Register with facebook</button>
@@ -116,15 +116,10 @@
     </div>
 
     <script type="text/javascript">
-        $(".btn-refresh").click(function() {
-            $.ajax({
-                type: 'GET',
-                url: '<?= route('register.refresh_captcha') ?>',
-                success: function(data) {
-                    $(".captcha span").html(data.captcha);
-                }
-            });
-        });
+        function onRecaptchaSuccess() {
+            console.log('reached here')
+            document.getElementById("submitBtn").disabled = false;
+        };
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>

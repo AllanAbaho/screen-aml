@@ -321,7 +321,7 @@
                   <div class="error-message"></div>
                   <div class="sent-message">Your message has been sent. Thank you!</div>
 
-                  <button type="submit">Send Message</button>
+                  <button type="submit" id="submitBtn" disabled>Send Message</button>
                 </div>
 
               </div>
@@ -434,6 +434,13 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script type="text/javascript">
+        function onRecaptchaSuccess() {
+            console.log('reached here')
+            document.getElementById("submitBtn").disabled = false;
+        };
+    </script>
 
   <!-- Vendor JS Files -->
   <script src="{{ asset('assets/frontend/vendor/purecounter/purecounter_vanilla.js') }}"></script>
