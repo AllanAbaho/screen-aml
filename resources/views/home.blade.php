@@ -313,7 +313,7 @@
                 <div class="col-md-12">
                   <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
                 </div>
-                <div class="g-recaptcha col-md-12" data-sitekey="6Lfdg5cmAAAAAJhzEwGAcWeqZQSrFmfA0Z_eBy1O" data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaResponseExpiry" data-error-callback="onRecaptchaError">
+                <div class="g-recaptcha col-md-12" data-sitekey="6LcbjpcmAAAAAEMH-rPm-7O08kFINeHflFbqW2Rd" data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaResponseExpiry" data-error-callback="onRecaptchaError">
                 </div>
 
                 <div class="col-md-12 text-center">
