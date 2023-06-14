@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="assets/backend/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="assets/backend/css/style.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer>
-  </script>
+    </script>
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -77,8 +77,8 @@
     <script type="text/javascript">
         function onRecaptchaSuccess() {
             console.log('reached here')
-    // $('#submitBtn').removeAttr('disabled');
-};
+            document.getElementById("submitBtn").disabled = false;
+        };
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
