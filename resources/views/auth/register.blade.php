@@ -32,72 +32,52 @@
 <body class="bg-dark">
 
     <div class="sufee-login d-flex align-content-center flex-wrap">
-        <div class="container" style="padding-top: 5%;">
-            <h1 style="color:#58D68D; text-align:center; "> <strong> KYC UGANDA</strong></h1>
-            <div class="row">
-                <div class="col-md-7">
-                <div class="login-content">
-                    <h2 style="color:#fff; padding-bottom:10px"> Why Choose Us</h2>
-                        <p style="color:#ffd">WE BUILD AML COMPLIANCE PROGRAMS THAT ARE EASY TO USE AND REGULATOR FRIENDLY.</p>
-                        <p style="color: #D7DBDD">Anti Money Laundering Compliance is Difficult, Complicated and Expensive. Working with clients, we have been able to help them understand their obligations, implement an AML/CTF Compliance Program, made it affordable for them to manage internally and reviewed their progress towards perfection.</p>
-                        
-                        <h2 style="color:#fff; padding-bottom:10px; padding-top:10px"> How It works</h2>
-                        <p style="color: #D7DBDD">Understand new risks in real-time with our proprietary database of Sanctions, Watchlists, PEPs, and Adverse Media, offering richer data quality and provenance</p>
-                        <p style="color: #D7DBDD">Reduce false positives with consolidated profiles and tailored matching and monitoring.</p>
-                        <p style="color: #D7DBDD">Seamlessly integrate AML checks into your onboarding workflow via a highly functional RESTful API.</p>
-                        <p style="color: #D7DBDD">Receive automated ongoing monitoring alerts related to relevant changes in risk status.</p>
-                    </div>
+        <div class="container" style="padding-top: 2%;">
+            <div class="login-content">
+                <div class="login-logo">
+                    <h3 style="color:#fff; text-align:center; "> <strong> REGISTER</strong></h3>
+                    @include('messages')
 
                 </div>
-                <div class="col-md-5">
-                    <div class="login-content">
-                        <div class="login-logo">
-                        <h3 style="color:#fff; text-align:center; "> <strong> REGISTER</strong></h3>
-                            @include('messages')
+                <div class="login-form">
+                    <form action="{{ route('register.perform') }}" method="post">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
+                        <div class="form-group">
+                            <label>Email address</label>
+                            <input type="email" name="email" class="form-control" placeholder="Email" required>
                         </div>
-                        <div class="login-form">
-                            <form action="{{ route('register.perform') }}" method="post">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
+                        </div>
 
-                                <div class="form-group">
-                                    <label>Email address</label>
-                                    <input type="email" name="email" class="form-control" placeholder="Email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Phone Number</label>
-                                    <input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="password" name="password" class="form-control" placeholder="Password" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Confirm Password</label>
-                                    <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
-                                </div>
-
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Agree the terms and policy
-                                    </label>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Register</button>
-                                <!-- <div class="social-login-content">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Agree the terms and policy
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Register</button>
+                        <!-- <div class="social-login-content">
                             <div class="social-button">
                                 <button type="button" class="btn social facebook btn-flat btn-addon mb-3"><i class="ti-facebook"></i>Register with facebook</button>
                                 <button type="button" class="btn social twitter btn-flat btn-addon mt-2"><i class="ti-twitter"></i>Register with twitter</button>
                             </div>
                         </div> -->
-                                <div class="register-link m-t-15 text-center">
-                                    <p>Already have account ? <a style="color:blue" href="{{ route('login.show') }}"> Sign in</a></p>
-                                </div>
-                            </form>
+                        <div class="register-link m-t-15 text-center">
+                            <p>Already have account ? <a style="color:blue" href="{{ route('login.show') }}"> Sign in</a></p>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
-
         </div>
     </div>
 

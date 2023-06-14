@@ -33,57 +33,40 @@
 
     <div class="sufee-login d-flex align-content-center flex-wrap">
         <div class="container" style="padding-top: 5%;">
-        <h1 style="color:#58D68D; text-align:center; "> <strong> KYC UGANDA</strong></h1>
 
-            <div class="row">
-                <div class="col-md-7">
-                    <div class="login-content">
-                    <h2 style="color:#fff; padding-bottom:10px"> Our Mission</h2>
-                        <p style="color:#ffd">OUR GOAL IS TO SOLVE YOUR SCREENING AND CONTINIOUS MONITORING PROBLEM</p>
-                        <p style="color: #D7DBDD">Our AML Technology Team is built to engage and enable customers achieve their AML Compliance goals of customer screening and continuous monitoring of customers risk profiles as required by the Anti Money Laundering Act.</p>
-                        
-                        <h2 style="color:#fff; padding-bottom:10px; padding-top:10px"> Our Vision</h2>
-                        <p style="color:#ffd">WE SEE OURSELVES AS AML PROFESSIONALS HELPING MILLIONS TAKE ADVANTAGE OF THEIR HARDWORK</p>
-                        <p style="color: #D7DBDD">We are on a mission to help millions of people take advantage of their hard work. Our mission is the driving force behind our services, and our professionals are dedicated to the highest professional standards.</p>
-                    </div>
+            <div class="login-content">
+                <div class="login-logo">
+                    <h3 style="color:#fff; text-align:center; "> <strong> LOGIN</strong></h3>
+                    @include('messages')
                 </div>
-                <div class="col-md-5">
-                    <div class="login-content">
-                        <div class="login-logo">
-                        <h3 style="color:#fff; text-align:center; "> <strong> LOGIN</strong></h3>
-                            @include('messages')
-                        </div>
-                        <div class="login-form">
-                            <form action="{{ route('login.perform') }}" method="post">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <div class="login-form">
+                    <form action="{{ route('login.perform') }}" method="post">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                                <div class="form-group">
-                                    <label>Email address</label>
-                                    <input type="email" name="email" class="form-control" placeholder="Email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="password" name="password" class="form-control" placeholder="Password" required>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Remember Me
-                                    </label>
-                                    <label class="pull-right">
-                                        <a style="color:blue" href="{{ url('forgot-password') }}">Forgotten Password?</a>
-                                    </label>
-
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Sign in</button>
-                                <div class="register-link m-t-15 text-center">
-                                    <p>Don't have account ? <a style="color:blue" href="{{ route('register.show') }}"> Sign Up Here</a></p>
-                                </div>
-                            </form>
+                        <div class="form-group">
+                            <label>Email address</label>
+                            <input type="email" name="email" class="form-control" placeholder="Email" required>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Remember Me
+                            </label>
+                            <label class="pull-right">
+                                <a style="color:blue" href="{{ url('forgot-password') }}">Forgotten Password?</a>
+                            </label>
+
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Sign in</button>
+                        <div class="register-link m-t-15 text-center">
+                            <p>Don't have account ? <a style="color:blue" href="{{ route('register.show') }}"> Sign Up Here</a></p>
+                        </div>
+                    </form>
                 </div>
             </div>
-
 
         </div>
     </div>
