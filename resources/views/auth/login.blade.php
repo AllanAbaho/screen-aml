@@ -77,8 +77,12 @@
     <script type="text/javascript">
         function onRecaptchaSuccess() {
             console.log('reached here')
-    $('#submitBtn').removeAttr('disabled');
+    // $('#submitBtn').removeAttr('disabled');
 };
+
+onRecaptchaSuccess().catch((error) => {
+  console.error(error);
+})
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
