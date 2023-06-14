@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Smith & Bolton - Home</title>
+  <title>KYC UGANDA - Home</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -48,7 +48,7 @@
 
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="{{ asset('assets/frontend/img/smith_logo.JPG') }}" alt="">
-        <!-- <span>Smith & Bolton</span> -->
+        <!-- <span>KYC UGANDA</span> -->
       </a>
 
       <nav id="navbar" class="navbar">
@@ -169,8 +169,8 @@
 
           <div class="col-lg-3 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">
             <div class="box">
-              <a href="https://aml.smithandboltons.com"><img src="{{ asset('assets/frontend/img/values-3.png') }}" class="img-fluid" alt=""></a>
-              <a href="https://aml.smithandboltons.com"><h3> AML Technology</h3></a>
+              <a href="{{ route('login.show') }}"><img src="{{ asset('assets/frontend/img/values-3.png') }}" class="img-fluid" alt=""></a>
+              <a href="{{ route('login.show') }}"><h3> AML Technology</h3></a>
               <p>Customer Risk Profiles change frequently. Take advantage of curated local and global databases to
                 complement your AML/CFT KYC & Continuous Monitoring obligations.</p>
 
@@ -363,7 +363,7 @@
           <div class="col-lg-5 col-md-12 footer-info">
             <a href="index.html" class="logo d-flex align-items-center">
               <img src="{{ asset('assets/frontend/img/footer_logo-removebg-preview.png') }}" alt="">
-              <!-- <span>Smith & Bolton</span> -->
+              <!-- <span>KYC UGANDA</span> -->
             </a>
             <p>Smith and Bolton Limited consists of a team of Lawyers, Compliance Practitioners, Internal
               Auditors and Risk Management Practitioners.
@@ -421,7 +421,7 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Smith & Bolton</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>KYC UGANDA</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
