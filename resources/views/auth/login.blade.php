@@ -76,6 +76,7 @@
 
     <script type="text/javascript">
         function onRecaptchaSuccess() {
+            console.log('reached here')
     $('#submitBtn').removeAttr('disabled');
 };
     </script>
