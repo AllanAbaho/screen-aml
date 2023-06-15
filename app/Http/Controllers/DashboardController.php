@@ -61,23 +61,23 @@ class DashboardController extends Controller
         Log::info('Collect Payment Response', [$request]);
 
         $data = $request->data;
-        Log::info([$data['amount'],$data['phonenumber']]);        
+        Log::info([$data['amount'], $data['phonenumber']]);
 
         $phone = $data['phonenumber'];
-        $user = User::where('phone', '0'.ltrim($phone,'+256'))->first();
-        if(!$user){
+        $user = User::where('phone', '0' . ltrim($phone, '+256'))->first();
+        if (!$user) {
             return response('No user found');
         }
         $amount = intval($data['amount']);
-        $walletTopup = WalletTopups::where('user_id',$user->id)->where('amount',$amount)->where('status','new')->first();
-        if($walletTopup){
+        $walletTopup = WalletTopups::where('user_id', $user->id)->where('amount', $amount)->where('status', 'new')->first();
+        if ($walletTopup) {
             $walletTopup->status = 'Received';
             if ($walletTopup->save()) {
                 $user->wallet_balance += $walletTopup->amount;
                 $user->save();
                 return response('Transaction updated successfully');
-            }    
-        }else{
+            }
+        } else {
             Log::info('No transaction found');
             return response('No transaction found');
         }
@@ -230,82 +230,65 @@ class DashboardController extends Controller
         }
     }
 
-    // public function webHook($id){
-    //     $url = env('BEYONIC_API') . '/webhooks';
-    //     $post_data = [
-    //         'event' => 'collection.received',
-    //         // 'target' => route('dashboard.update-balance',['id'=>$id])
-    //         'target' => 'https://aml.smithandboltons.com/dashboard/update-balance/'.$id
-    //     ];
-    //     $ch = curl_init($url);
-    //     curl_setopt($ch, CURLOPT_POST, 1);
-    //     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
-    //     curl_setopt($ch, CURLOPT_TIMEOUT, 0);
-    //     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization: Token ' . env('BEYONIC_API_KEY')));
-    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    //     $result = curl_exec($ch);
-    //     return $result;
-    // }
+    public function accesstkn()
+    {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api-uat.integration.go.ug/token',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_SSL_VERIFYHOST => FALSE,
+            CURLOPT_SSL_VERIFYPEER => FALSE,
+            CURLOPT_POSTFIELDS => 'grant_type=client_credentials',
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Basic M0M1T2h6NU13ZDhBMmZ1al91X3FqRUF6RmwwYToySV9Lc21wcVBSNk9zaUlLbFRMc01INlk1a2th',
+                'Content-Type: application/x-www-form-urlencoded'
+            ),
+        ));
 
-    // public function accesstkn()
-    // {
-    //     $curl = curl_init();
-    //     curl_setopt_array($curl, array(
-    //         CURLOPT_URL => 'https://api-uat.integration.go.ug/token',
-    //         CURLOPT_RETURNTRANSFER => true,
-    //         CURLOPT_ENCODING => '',
-    //         CURLOPT_MAXREDIRS => 10,
-    //         CURLOPT_TIMEOUT => 0,
-    //         CURLOPT_FOLLOWLOCATION => true,
-    //         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    //         CURLOPT_CUSTOMREQUEST => 'POST',
-    //         CURLOPT_SSL_VERIFYHOST => FALSE,
-    //         CURLOPT_SSL_VERIFYPEER => FALSE,
-    //         CURLOPT_POSTFIELDS => 'grant_type=client_credentials',
-    //         CURLOPT_HTTPHEADER => array(
-    //             'Authorization: Basic M0M1T2h6NU13ZDhBMmZ1al91X3FqRUF6RmwwYToySV9Lc21wcVBSNk9zaUlLbFRMc01INlk1a2th',
-    //             'Content-Type: application/x-www-form-urlencoded'
-    //         ),
-    //     ));
+        $response = curl_exec($curl);
+        if (curl_errno($curl)) {
+            $error_msg = curl_error($curl);
+            Log::info('Search Curl Error', [$error_msg]);
+            return response(['status' => 'failure', 'message' => $error_msg]);
+        }
+        curl_close($curl);
+        $json = json_decode($response, true);
 
-    //     $response = curl_exec($curl);
-    //     if (curl_errno($curl)) {
-    //         $error_msg = curl_error($curl);
-    //         Log::info('Search Curl Error', [$error_msg]);
-    //         return response(['status' => 'failure', 'message' => $error_msg]);
-    //     }
-    //     curl_close($curl);
-    //     $json = json_decode($response, true);
+        return $json['access_token'];
+    }
 
-    //     return $json['access_token'];
-    // }
+    public function get_business_registration_details($brn)
+    {
+        $access = $this->accesstkn();
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api-uat.integration.go.ug/t/ursb.go.ug/ursb-brs-api/1.0.0/entity/get_entity_full/' . $brn . '/-/APS-NITA',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_SSL_VERIFYHOST => FALSE,
+            CURLOPT_SSL_VERIFYPEER => FALSE,
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer ' . $access
+            ),
+        ));
 
-    // public function get_business_registration_details($brn)
-    // {
-    //     $access = $this->accesstkn();
-    //     $curl = curl_init();
-    //     curl_setopt_array($curl, array(
-    //         CURLOPT_URL => 'https://api-uat.integration.go.ug/t/ursb.go.ug/ursb-brs-api/1.0.0/entity/get_entity_full/' . $brn . '/-/APS-NITA',
-    //         CURLOPT_RETURNTRANSFER => true,
-    //         CURLOPT_ENCODING => '',
-    //         CURLOPT_MAXREDIRS => 10,
-    //         CURLOPT_TIMEOUT => 0,
-    //         CURLOPT_FOLLOWLOCATION => true,
-    //         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    //         CURLOPT_CUSTOMREQUEST => 'GET',
-    //         CURLOPT_SSL_VERIFYHOST => FALSE,
-    //         CURLOPT_SSL_VERIFYPEER => FALSE,
-    //         CURLOPT_HTTPHEADER => array(
-    //             'Authorization: Bearer ' . $access
-    //         ),
-    //     ));
+        $response = curl_exec($curl);
 
-    //     $response = curl_exec($curl);
-
-    //     curl_close($curl);
-    //     $xml = simplexml_load_string($response, "SimpleXMLElement", LIBXML_NOCDATA);
-    //     $json = json_encode($xml);
-    //     $array = json_decode($json, TRUE);
-    //     return $array;
-    // }
+        curl_close($curl);
+        $xml = simplexml_load_string($response, "SimpleXMLElement", LIBXML_NOCDATA);
+        $json = json_encode($xml);
+        $array = json_decode($json, TRUE);
+        return $array;
+    }
 }

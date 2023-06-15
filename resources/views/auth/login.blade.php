@@ -53,7 +53,7 @@
                             <label>Password</label>
                             <input type="password" name="password" class="form-control" placeholder="Password" required>
                         </div>
-                        <div class="g-recaptcha form-group" data-sitekey="6LcbjpcmAAAAAEMH-rPm-7O08kFINeHflFbqW2Rd" data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaResponseExpiry" data-error-callback="onRecaptchaError"></div>
+                        <div class="g-recaptcha form-group" data-sitekey="{{env('GOOGLE_RECAPTCHA')}}" data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaResponseExpiry" data-error-callback="onRecaptchaError"></div>
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox"> Remember Me

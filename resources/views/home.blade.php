@@ -313,8 +313,7 @@
                 <div class="col-md-12">
                   <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
                 </div>
-                <div class="g-recaptcha col-md-12" data-sitekey="6LcbjpcmAAAAAEMH-rPm-7O08kFINeHflFbqW2Rd" data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaResponseExpiry" data-error-callback="onRecaptchaError">
-                </div>
+                <div class="g-recaptcha form-group" data-sitekey="{{env('GOOGLE_RECAPTCHA')}}" data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaResponseExpiry" data-error-callback="onRecaptchaError"></div>
 
                 <div class="col-md-12 text-center">
                   <div class="loading">Loading</div>
@@ -436,11 +435,11 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <script type="text/javascript">
-        function onRecaptchaSuccess() {
-            console.log('reached here')
-            document.getElementById("submitBtn").disabled = false;
-        };
-    </script>
+    function onRecaptchaSuccess() {
+      console.log('reached here')
+      document.getElementById("submitBtn").disabled = false;
+    };
+  </script>
 
   <!-- Vendor JS Files -->
   <script src="{{ asset('assets/frontend/vendor/purecounter/purecounter_vanilla.js') }}"></script>
