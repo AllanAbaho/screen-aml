@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Mail\RegistrationMail;
 use App\Http\Requests\RegisterRequest;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -27,9 +28,17 @@ class RegisterController extends Controller
      */
     public function register(RegisterRequest $request)
     {
+        $email = $request->get('email');
+        $company = $request->get('company');
         User::create($request->validated());
-
+        $this->sendEmail($email, $company);
         return redirect('login')->with('success', "Account successfully registered. Please login");
+    }
+
+    public function sendEmail($email, $company)
+    {
+        $data = ['company' => $company];
+        Mail::to($email)->send(new RegistrationMail($data));
     }
 
     // /**
