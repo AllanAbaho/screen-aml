@@ -13,14 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['namespace' => 'App\Http\Controllers'], function()
-{   
+Route::group(['namespace' => 'App\Http\Controllers'], function () {
     /**
      * Home Routes
      */
     Route::get('/', 'HomeController@show')->name('home.show');
 
-    Route::group(['middleware' => ['guest']], function() {
+    Route::group(['middleware' => ['guest']], function () {
         /**
          * Register Routes
          */
@@ -36,10 +35,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
         Route::get('/forgot-password', function () {
             return view('forgot-password');
-        });  
+        });
     });
 
-    Route::group(['middleware' => ['auth']], function() {
+    Route::group(['middleware' => ['auth']], function () {
         /**
          * Logout Routes
          */
@@ -53,8 +52,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::post('/dashboard/payment-status/{id}', 'DashboardController@checkPaymentStatus')->name('dashboard.check-payment-status');
         Route::get('/dashboard/search-results/{id}', 'DashboardController@searchResults')->name('dashboard.search-results');
         Route::get('/dashboard/recent-searches', 'DashboardController@recentSearches')->name('dashboard.recent-searches');
-        Route::get('/dashboard/get_business_registration_details/{entity}', 'DashboardController@get_business_registration_details')->name('dashboard.get_business_registration_details');
-        Route::get('/dashboard/accesstkn', 'DashboardController@accesstkn')->name('dashboard.accesstkn');
         Route::get('/dashboard/generate-pdf/{searchId}/{docId}', 'DashboardController@generatePDF')->name('dashboard.generate-pdf');
     });
 });
