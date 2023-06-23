@@ -70,17 +70,15 @@ class DashboardController extends Controller
 
     public function updateBalance(Request $request)
     {
-        Log::info('Collect Payment Response', [$request]);
+        Log::info('Beyonic Update Response', [$request]);
 
-        $data = $request->data;
-        Log::info([$data['amount'], $data['phonenumber']]);
-
-        $phone = $data['phonenumber'];
+        $phone = $request->get('phonenumber');
+        $amount = $request->get('amount');
         $user = User::where('phone', '0' . ltrim($phone, '+256'))->first();
         if (!$user) {
             return response('No user found');
         }
-        $amount = intval($data['amount']);
+        $amount = intval($amount);
         $walletTopup = WalletTopups::where('user_id', $user->id)->where('amount', $amount)->where('status', 'new')->first();
         if ($walletTopup) {
             $walletTopup->status = 'Received';
