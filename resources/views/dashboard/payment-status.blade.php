@@ -108,8 +108,10 @@ use Illuminate\Support\Facades\Auth; ?>
 
     <script>
         setInterval(function() {
-            url = '<?= route('dashboard.check-payment-status', ['id' => $walletTopup->id]); ?>';
-            redirectUrl = '<?= route('dashboard.index'); ?>';
+            // url = '<!?= route('dashboard.check-payment-status', ['id' => $walletTopup->id]); ?>';
+            // redirectUrl = '<!?= route('dashboard.index'); ?>';
+            url = 'https://kycuganda.com/dashboard/payment-status/' + <?= $walletTopup->id; ?>;
+            redirectUrl = 'https://kycuganda.com/dashboard';
             console.log(url);
             jQuery.post(url, {
                     "_token": "{{ csrf_token() }}",
