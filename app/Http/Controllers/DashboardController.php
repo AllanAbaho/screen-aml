@@ -74,6 +74,8 @@ class DashboardController extends Controller
 
         $phone = $request->get('phonenumber');
         $amount = $request->get('amount');
+        Log::info('Account Details', [$phone, $amount]);
+
         $user = User::where('phone', '0' . ltrim($phone, '+256'))->first();
         if (!$user) {
             return response('No user found');
