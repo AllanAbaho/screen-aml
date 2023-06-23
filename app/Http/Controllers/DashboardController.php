@@ -19,6 +19,12 @@ class DashboardController extends Controller
             return view('no-permission');
         }
 
+        $user = User::where('id', Auth::id())->first();
+        if ($user->wallet_balance < 2500) {
+            return redirect()->route('dashboard.search-results', ['id' => $searchId])->with('success', "Insufficient balance. Please top up to proceed");
+        }
+
+
         $results = Searches::find($searchId);
         $content = json_decode($results['content'], true);
         $rows = $content['data']['hits'];
@@ -36,12 +42,18 @@ class DashboardController extends Controller
             'pageDetails' => $pageDetails
         ];
 
-        // return view('dashboard.pdf', $data);
-
+        $user->wallet_balance = $user->wallet_balance - 2500;
+        $user->save();
 
         $pdf = PDF::loadView('dashboard.pdf', $data);
-
         return $pdf->download($pageDetails['name'] . '.pdf');
+
+        // if ($pdf->download($pageDetails['name'] . '.pdf')) {
+        //     $user->wallet_balance = $user->wallet_balance - 2500;
+        //     $user->save();
+        //     return redirect()->route('dashboard.search-results', ['id' => $searchId])->with('success', "Download successful and account debited successfully");
+
+        // }
     }
 
     public function index()
