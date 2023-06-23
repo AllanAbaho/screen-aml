@@ -242,7 +242,6 @@ class DashboardController extends Controller
                 curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization: Token ' . env('BEYONIC_API_KEY')));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 $result = curl_exec($ch);
-                dd($result);
                 if (curl_errno($ch)) {
                     $error_msg = curl_error($ch);
                     Log::info('Collect Payment Curl Error', [$error_msg]);
