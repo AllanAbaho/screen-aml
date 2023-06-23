@@ -31,7 +31,7 @@ class LoginController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ];
-        if(!Auth::validate($credentials)):
+        if (!Auth::validate($credentials)) :
             return redirect()->to('login')
                 ->withErrors(trans('auth.failed'));
         endif;
@@ -41,8 +41,10 @@ class LoginController extends Controller
         Auth::login($user);
 
         // return $this->authenticated($request, $user);
+        if (Auth::user()->role == 'Admin') {
+            return redirect('admin')->with('success', "Login successful.");
+        }
         return redirect('dashboard')->with('success', "Login successful.");
-
     }
 
     /**
@@ -53,7 +55,7 @@ class LoginController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    protected function authenticated(Request $request, $user) 
+    protected function authenticated(Request $request, $user)
     {
         return redirect()->intended();
     }

@@ -25,7 +25,7 @@ Artisan::command('create:admin', function () {
         $user->role = 'Admin';
         $user->email = 'oscar@smithandboltons.com';
         $user->phone = '0700000000';
-        $user->password = bcrypt('Admin@123');
+        $user->password = 'Admin@123';
         $user->save();
         $this->comment('Admin account created successfully');
     } catch (Exception $e) {

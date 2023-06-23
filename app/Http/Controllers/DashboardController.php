@@ -15,6 +15,10 @@ class DashboardController extends Controller
 {
     public function generatePDF($searchId, $docId)
     {
+        if (Auth::user()->role != 'Client') {
+            return view('no-permission');
+        }
+
         $results = Searches::find($searchId);
         $content = json_decode($results['content'], true);
         $rows = $content['data']['hits'];
@@ -42,6 +46,10 @@ class DashboardController extends Controller
 
     public function index()
     {
+        if (Auth::user()->role != 'Client') {
+            return redirect()->route('admin.index');
+        }
+
         $searchCount = Searches::where('created_by', Auth::id())->count();
         $searches = Searches::where('created_by', Auth::id())->latest()->take(6)->get();
         $data = [
@@ -53,11 +61,19 @@ class DashboardController extends Controller
 
     public function addCredit()
     {
+        if (Auth::user()->role != 'Client') {
+            return view('no-permission');
+        }
+
         return view('dashboard.add-credit');
     }
 
     public function updateBalance(Request $request)
     {
+        if (Auth::user()->role != 'Client') {
+            return view('no-permission');
+        }
+
         Log::info('Collect Payment Response', [$request]);
 
         $data = $request->data;
@@ -85,6 +101,10 @@ class DashboardController extends Controller
 
     public function recentSearches()
     {
+        if (Auth::user()->role != 'Client') {
+            return view('no-permission');
+        }
+
         $searches = Searches::where('created_by', Auth::id())->latest()->get();
         $data = [
             'searches' => $searches,
@@ -95,11 +115,19 @@ class DashboardController extends Controller
 
     public function searchForm()
     {
+        if (Auth::user()->role != 'Client') {
+            return view('no-permission');
+        }
+
         return view('dashboard.search-form');
     }
 
     public function searchResults($id)
     {
+        if (Auth::user()->role != 'Client') {
+            return view('no-permission');
+        }
+
         $results = Searches::find($id);
         if (!$results) {
             return redirect()->route('dashboard.search');
@@ -109,6 +137,10 @@ class DashboardController extends Controller
 
     public function search(Request $request)
     {
+        if (Auth::user()->role != 'Client') {
+            return view('no-permission');
+        }
+
         try {
             Log::info('Search Request', [$request]);
             $search_term = $request->get('search_term');
@@ -165,6 +197,10 @@ class DashboardController extends Controller
 
     public function paymentStatus(Request $request)
     {
+        if (Auth::user()->role != 'Client') {
+            return view('no-permission');
+        }
+
         $id = $request->id;
         $walletTopup = WalletTopups::find($id);
         return view('dashboard.payment-status', ['walletTopup' => $walletTopup]);
@@ -172,12 +208,20 @@ class DashboardController extends Controller
 
     public function checkPaymentStatus(Request $request)
     {
+        if (Auth::user()->role != 'Client') {
+            return view('no-permission');
+        }
+
         $id = $request->id;
         $walletTopup = WalletTopups::find($id);
         return $walletTopup->status;
     }
     public function collectPayment(Request $request)
     {
+        if (Auth::user()->role != 'Client') {
+            return view('no-permission');
+        }
+
         try {
             Log::info('Collect Payment Request', [$request]);
             $amount = $request->amount;

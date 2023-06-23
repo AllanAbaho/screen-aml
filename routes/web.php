@@ -36,9 +36,18 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/forgot-password', function () {
             return view('forgot-password');
         });
+        Route::get('/no-permission', function () {
+            return view('no-permission');
+        });
     });
 
     Route::group(['middleware' => ['auth']], function () {
+        Route::get('/admin', 'AdminController@index')->name('admin.index');
+        Route::get('/admin/users', 'AdminController@users')->name('admin.users');
+        Route::get('/admin/recent-searches', 'AdminController@recentSearches')->name('admin.recent-searches');
+        Route::get('/admin/search-results/{id}', 'AdminController@searchResults')->name('admin.search-results');
+        Route::get('/admin/generate-pdf/{searchId}/{docId}', 'AdminController@generatePDF')->name('admin.generate-pdf');
+
         /**
          * Logout Routes
          */
