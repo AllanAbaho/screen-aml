@@ -70,10 +70,6 @@ class DashboardController extends Controller
 
     public function updateBalance(Request $request)
     {
-        if (Auth::user()->role != 'Client') {
-            return view('no-permission');
-        }
-
         Log::info('Collect Payment Response', [$request]);
 
         $data = $request->data;
