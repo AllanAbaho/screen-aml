@@ -85,5 +85,3 @@ class HomeController extends Controller
         }
     }
 }
-
-<am:fault xmlns:am=\"http://wso2.org/apimanager\"><am:code>404</am:code><am:type>Status report</am:type><am:message>Runtime Error</am:message><am:description>No matching resource found for given API Request</am:description></am:fault>
