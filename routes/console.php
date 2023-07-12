@@ -27,7 +27,7 @@ Artisan::command('create:admin', function () {
         $user->phone = '0700000000';
         $user->password = 'Admin@123';
         $user->save();
-        $this->comment('Admin account created successfully');
+        $this->comment('Admin Creadted successfully');
     } catch (Exception $e) {
         $this->comment($e->getMessage());
     }

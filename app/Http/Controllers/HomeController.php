@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
@@ -44,32 +45,43 @@ class HomeController extends Controller
         return $json['access_token'];
     }
 
-    public function get_business_registration_details($brn)
+    public function getPerson($nin)
     {
-        $access = $this->accesstkn();
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api-uat.integration.go.ug/t/ursb.go.ug/ursb-brs-api/1.0.0/entity/get_entity_full/' . $brn . '/-/APS-NITA',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_SSL_VERIFYHOST => FALSE,
-            CURLOPT_SSL_VERIFYPEER => FALSE,
-            CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer ' . $access
-            ),
-        ));
+        try {
+            $access = $this->getAccessToken();
+            $curl = curl_init();
+            $baseUrl = 'https://api-uat.integration.go.ug/';
+            $niraUrl = 't/nira.go.ug/nira-api/1.0.0/';
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $baseUrl . $niraUrl . '/getPerson?nationalId=' . $nin,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_SSL_VERIFYHOST => FALSE,
+                CURLOPT_SSL_VERIFYPEER => FALSE,
+                CURLOPT_HTTPHEADER => array(
+                    'Authorization: Bearer ' . $access
+                ),
+            ));
 
-        $response = curl_exec($curl);
+            $response = curl_exec($curl);
+            Log::info('Nira Response', [$response]);
 
-        curl_close($curl);
-        $xml = simplexml_load_string($response, "SimpleXMLElement", LIBXML_NOCDATA);
-        $json = json_encode($xml);
-        $array = json_decode($json, TRUE);
-        return $array;
+            curl_close($curl);
+            $xml = simplexml_load_string($response, "SimpleXMLElement", LIBXML_NOCDATA);
+            $json = json_encode($xml);
+            $array = json_decode($json, TRUE);
+
+            Log::info('Returned Array', [$array]);
+
+            return $array;
+        } catch (Exception $e) {
+            Log::info('An error occured', [$e->getMessage()]);
+            return $e->getMessage();
+        }
     }
 }
