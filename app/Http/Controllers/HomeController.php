@@ -52,8 +52,10 @@ class HomeController extends Controller
             $curl = curl_init();
             $baseUrl = 'https://api-uat.integration.go.ug/';
             $niraUrl = 't/nira.go.ug/nira-api/1.0.0/';
+            $url = $baseUrl . $niraUrl . 'getPerson?nationalId=' . $nin;
+            Log::info('API Url', [$url]);
             curl_setopt_array($curl, array(
-                CURLOPT_URL => $baseUrl . $niraUrl . 'getPerson?nationalId=' . $nin,
+                CURLOPT_URL => $url,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
