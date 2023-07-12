@@ -53,7 +53,7 @@ class HomeController extends Controller
             $baseUrl = 'https://api-uat.integration.go.ug/';
             $niraUrl = 't/nira.go.ug/nira-api/1.0.0/';
             curl_setopt_array($curl, array(
-                CURLOPT_URL => $baseUrl . $niraUrl . '/getPerson?nationalId=' . $nin,
+                CURLOPT_URL => $baseUrl . $niraUrl . 'getPerson?nationalId=' . $nin,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
@@ -85,3 +85,5 @@ class HomeController extends Controller
         }
     }
 }
+
+<am:fault xmlns:am=\"http://wso2.org/apimanager\"><am:code>404</am:code><am:type>Status report</am:type><am:message>Runtime Error</am:message><am:description>No matching resource found for given API Request</am:description></am:fault>
