@@ -46,7 +46,7 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="{{ asset('assets/frontend/img/smith_logo.JPG') }}" alt="">
+        <img src="{{ asset('assets/frontend/img/favicon.JPG') }}" alt="" height="80px">
         <!-- <span>KYC UGANDA</span> -->
       </a>
 
