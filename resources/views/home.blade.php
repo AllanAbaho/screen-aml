@@ -6,8 +6,8 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>KYC UGANDA - Home</title>
-  <meta content="Search customers through Sanction lists, PEP lists, adverse media, National ID and company verification." name="description">
-  <meta content="The only easy, affordable and accurate anti money laundering know your customer online tool in uganda." name="description">
+  <meta content="Search customers through Sanction Lists, PEP Lists, Adverse Media, National ID and Company Verification." name="description">
+  <meta content="The only Easy, Affordable and Accurate Anti-Money Laundering & Know Your Customer online tool in Uganda." name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
@@ -71,8 +71,8 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center">
-          <h1 data-aos="fade-up">Let's make KYC, Easy, Affordable and Predictable </h1>
-          <h2 data-aos="fade-up" data-aos-delay="400">The only easy, affordable and accurate anti money laundering know your customer online tool in uganda. <br>Search customers through Sanction lists, PEP lists, adverse media, National ID and company verification.</h2>
+          <h1 data-aos="fade-up">Let's make KYC, Easy, Accurate and Affordable </h1>
+          <h2 data-aos="fade-up" data-aos-delay="400">The only Easy, Accurate and Affordable Anti-Money Laundering & Know Your Customer online tool in Uganda. <br>Search customers through Sanction Lists, PEP Lists, Adverse Media, National ID and Company Verification.</h2>
           <div data-aos="fade-up" data-aos-delay="600">
             <div class="text-center text-lg-start">
               <a href="#about" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
