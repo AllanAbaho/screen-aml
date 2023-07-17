@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>KYC UGANDA - Home</title>
+  <title>KYC UGANDA - The only Easy, Accurate & Affordable Anti-Money Laundering & Know Your Customer Online Tool In Uganda.</title>
   <meta content="Search customers through Sanction Lists, PEP Lists, Adverse Media, National ID and Company Verification." name="description">
   <meta content="The only Easy, Affordable and Accurate Anti-Money Laundering & Know Your Customer online tool in Uganda." name="description">
   <meta content="" name="keywords">
@@ -72,7 +72,7 @@
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center">
           <h1 data-aos="fade-up">Let's make KYC, Easy, Accurate and Affordable </h1>
-          <h2 data-aos="fade-up" data-aos-delay="400">The only Easy, Accurate and Affordable Anti-Money Laundering & Know Your Customer online tool in Uganda. <br>Search customers through Sanction Lists, PEP Lists, Adverse Media, National ID and Company Verification.</h2>
+          <h2 data-aos="fade-up" data-aos-delay="400">The only Easy, Accurate & Affordable Anti-Money Laundering & Know Your Customer Online Tool In Uganda. <br>Search Customers Through Sanction Lists, PEP Lists, Adverse Media, National ID & Company Verification.</h2>
           <div data-aos="fade-up" data-aos-delay="600">
             <div class="text-center text-lg-start">
               <a href="#about" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
