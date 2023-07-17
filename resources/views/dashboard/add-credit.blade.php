@@ -29,7 +29,9 @@
 
 
 </head>
-<?php use Illuminate\Support\Facades\Auth; ?>
+<?php
+
+use Illuminate\Support\Facades\Auth; ?>
 
 <body>
     <!-- Left Panel -->
@@ -38,7 +40,7 @@
 
     <div id="right-panel" class="right-panel">
 
-    @include('dashboard.custom-header')
+        @include('dashboard.custom-header')
 
         <div class="breadcrumbs">
             <div class="breadcrumbs-inner">
@@ -71,18 +73,18 @@
                         <div class="card">
                             <div class="card-header"><strong>Add Credit</strong><small> Mobile Money</small></div>
                             <div class="card-body card-block">
-                            <form action="{{ route('dashboard.collect-payment') }}" method="post">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                <form action="{{ route('dashboard.etherone-payment') }}" method="post">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                                <div class="form-group">
-                                    <label for="company" class=" form-control-label">Phone Number</label>
-                                    <input type="number" id="company" value="<?= Auth::user()->phone?>" placeholder="Enter recipient phone number" class="form-control" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="company" class=" form-control-label">Amount</label>
-                                    <input type="number" name="amount" id="amount" placeholder="Enter the amount" class="form-control">
-                                </div>
-                                <button type="submit" class="btn btn-success btn-sm">Send</button>
+                                    <div class="form-group">
+                                        <label for="company" class=" form-control-label">Phone Number</label>
+                                        <input type="number" id="company" value="<?= Auth::user()->phone ?>" placeholder="Enter recipient phone number" class="form-control" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="company" class=" form-control-label">Amount</label>
+                                        <input type="number" name="amount" id="amount" placeholder="Enter the amount" class="form-control">
+                                    </div>
+                                    <button type="submit" class="btn btn-success btn-sm">Send</button>
                                 </form>
 
                             </div>

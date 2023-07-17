@@ -108,9 +108,7 @@ use Illuminate\Support\Facades\Auth; ?>
 
     <script>
         setInterval(function() {
-            // url = '<!?= route('dashboard.check-payment-status', ['id' => $walletTopup->id]); ?>';
-            // redirectUrl = '<!?= route('dashboard.index'); ?>';
-            url = 'https://kycuganda.com/dashboard/payment-status/' + <?= $walletTopup->id; ?>;
+            url = 'https://kycuganda.com/dashboard/check-status/' + <?= $walletTopup->transactionID; ?>;
             redirectUrl = 'https://kycuganda.com/dashboard';
             console.log(url);
             jQuery.post(url, {
@@ -118,7 +116,7 @@ use Illuminate\Support\Facades\Auth; ?>
                 },
                 function(response) {
                     console.log(response);
-                    if (response == 'Received') {
+                    if (response == 'SUCCESS') {
                         window.location.replace(redirectUrl);
                     }
                 });

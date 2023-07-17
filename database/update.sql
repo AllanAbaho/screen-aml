@@ -1,0 +1,1 @@
+ALTER TABLE `wallet_topups` ADD `transactionID` INT(10) NULL AFTER `status`;

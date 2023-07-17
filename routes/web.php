@@ -57,8 +57,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/dashboard/search', 'DashboardController@searchForm')->name('dashboard.search-form');
         Route::get('/dashboard/add-credit', 'DashboardController@addCredit')->name('dashboard.add-credit');
         Route::post('/dashboard/collect-payment', 'DashboardController@collectPayment')->name('dashboard.collect-payment');
+        Route::post('/dashboard/etherone-payment', 'DashboardController@etheronePayment')->name('dashboard.etherone-payment');
         Route::get('/dashboard/payment-status/{id}', 'DashboardController@paymentStatus')->name('dashboard.payment-status');
-        Route::post('/dashboard/payment-status/{id}', 'DashboardController@checkPaymentStatus')->name('dashboard.check-payment-status');
+        Route::post('/dashboard/check-status/{id}', 'DashboardController@checkStatus')->name('dashboard.check-status');
         Route::get('/dashboard/search-results/{id}', 'DashboardController@searchResults')->name('dashboard.search-results');
         Route::get('/dashboard/recent-searches', 'DashboardController@recentSearches')->name('dashboard.recent-searches');
         Route::get('/dashboard/generate-pdf/{searchId}/{docId}', 'DashboardController@generatePDF')->name('dashboard.generate-pdf');

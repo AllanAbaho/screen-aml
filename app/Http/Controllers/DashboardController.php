@@ -280,4 +280,97 @@ class DashboardController extends Controller
             return response(['status' => 'failure', 'message' => $e->getMessage()]);
         }
     }
+
+    public function getAccessToken()
+    {
+        $postData = [
+            "appKey" => env('ETHERONE_KEY'),
+            "appSecret" => env('ETHERONE_SECRET')
+        ];
+        $postData = json_encode($postData);
+
+        $ch = curl_init(env('ETHERONE_API') . '/authenticate');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+        Log::info('Access Key', [$response]);
+        $token = $response['access_token'];
+        return $token;
+    }
+
+    public function checkStatus($transactionID)
+    {
+        $postData = [
+            "transactionID" => $transactionID,
+        ];
+        $postData = json_encode($postData);
+
+        $ch = curl_init(env('ETHERONE_API') . '/collection/enquiry');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization: Bearer ' . $this->getAccessToken()));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $status = $response['status'];
+        return $status;
+    }
+
+    public function etheronePayment(Request $request)
+    {
+        if (Auth::user()->role != 'Client') {
+            return view('no-permission');
+        }
+
+        try {
+            Log::info('Collect Payment Request', [$request]);
+            $amount = $request->amount;
+            if (isset($amount)) {
+                $url = env('ETHERONE_API') . '/collection/request';
+                $transactionID = rand(1111111111, 9999999999);
+                $post_data = [
+                    "msisdn" => "256" . ltrim(Auth::user()->phone, "0"),
+                    'amount' => $amount,
+                    'transactionID' => $transactionID,
+                    "narration" => "Wallet top up with KYC UGANDA",
+                ];
+                $ch = curl_init($url);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+                curl_setopt($ch, CURLOPT_TIMEOUT, 0);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization: Bearer ' . $this->getAccessToken()));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                $result = curl_exec($ch);
+                if (curl_errno($ch)) {
+                    $error_msg = curl_error($ch);
+                    Log::info('Collect Payment Curl Error', [$error_msg]);
+                    return response(['status' => 'failure', 'message' => $error_msg]);
+                }
+                curl_close($ch);
+                $result = (json_decode($result, true));
+                Log::info('Collect Payment Response', [$result]);
+                if ($result['code'] == 201) {
+
+                    $walletTopup = new WalletTopups;
+                    $walletTopup->amount = $amount;
+                    $walletTopup->user_id = Auth::id();
+                    $walletTopup->status = $result['status'];
+                    $walletTopup->transactionID = $transactionID;
+                    if ($walletTopup->save()) {
+                        $walletTopup->save();
+                        return redirect()->route('dashboard.payment-status', ['id' => $walletTopup->id])->with('message', 'Please enter pin to confirm payment');
+                    }
+                }
+                return response(['status' => $result['status'], 'message' => $result['message']]);
+            } else {
+                return response(['status' => 'FAILED', 'message' => 'Invalid request, some parameters were not passed in the payload.']);
+            }
+        } catch (Exception $e) {
+            Log::info('Search Exception Error', [$e->getMessage()]);
+            return response(['status' => 'failure', 'message' => $e->getMessage()]);
+        }
+    }
 }
