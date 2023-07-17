@@ -5,9 +5,9 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>KYC UGANDA - The only Easy, Accurate & Affordable Anti-Money Laundering & Know Your Customer Online Tool In Uganda.</title>
-  <meta content="Search customers through Sanction Lists, PEP Lists, Adverse Media, National ID and Company Verification." name="description">
-  <meta content="The only Easy, Affordable and Accurate Anti-Money Laundering & Know Your Customer online tool in Uganda." name="description">
+  <title>KYC UGANDA - Home</title>
+  <meta content="Search Customers Through Sanction Lists, PEP Lists, Adverse Media, National ID & Company Verification." name="description">
+  <meta content="The only Easy, Accurate & Affordable Anti-Money Laundering & Know Your Customer Online Tool In Uganda." name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
