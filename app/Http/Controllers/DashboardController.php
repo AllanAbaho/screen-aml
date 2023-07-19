@@ -297,7 +297,8 @@ class DashboardController extends Controller
         $response = curl_exec($ch);
         curl_close($ch);
         Log::info('Access Key', [$response]);
-        $token = $response['access_token'];
+        $decodedResponse = json_decode($response, true);
+        $token = $decodedResponse['access_token'];
         return $token;
     }
 
