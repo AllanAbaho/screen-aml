@@ -1,1 +1,1 @@
-ALTER TABLE `wallet_topups` ADD `transactionID` INT(10) NULL AFTER `status`;
+ALTER TABLE `wallet_topups` CHANGE `transactionID` `transactionID` VARCHAR(100) NULL DEFAULT NULL;
