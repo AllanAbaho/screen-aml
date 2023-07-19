@@ -316,7 +316,8 @@ class DashboardController extends Controller
         $response = curl_exec($ch);
         Log::info('Check Status Response', [$response]);
         curl_close($ch);
-        $status = $response['status'];
+        $decodedResponse = json_decode($response, true);
+        $status = $decodedResponse['status'];
         return $status;
     }
 
