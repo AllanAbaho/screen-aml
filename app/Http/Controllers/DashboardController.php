@@ -336,8 +336,8 @@ class DashboardController extends Controller
                 $transactionID = rand(1111111111, 9999999999);
                 $post_data = [
                     "msisdn" => "256" . ltrim(Auth::user()->phone, "0"),
-                    'amount' => $amount,
-                    'transactionID' => $transactionID,
+                    'amount' => (int) $amount,
+                    'transactionID' => (string) $transactionID,
                     "narration" => "Wallet top up with KYC UGANDA",
                 ];
                 $ch = curl_init($url);
