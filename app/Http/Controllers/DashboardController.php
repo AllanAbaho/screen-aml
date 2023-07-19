@@ -314,6 +314,7 @@ class DashboardController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
 
         $response = curl_exec($ch);
+        Log::info('Check Status Response', [$response]);
         curl_close($ch);
         $status = $response['status'];
         return $status;
