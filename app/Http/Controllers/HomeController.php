@@ -70,7 +70,14 @@ class HomeController extends Controller
             $baseUrl = 'https://api-uat.integration.go.ug/';
             $niraUrl = 't/nira.go.ug/nira-api/1.0.0/';
             $url = $baseUrl . $niraUrl . 'getPerson?nationalId=' . $nin;
-            Log::info('API Url', [$url]);
+            $headers = array(
+                'Authorization: Bearer ' . $access,
+                'nira-auth-forward: ' . base64_encode($username . ':' . $password_digest),
+                'nira-nonce: ' . $nonce,
+                'nira-created: ' . $created_request
+            );
+            Log::info('API Url', [$url, $headers]);
+
             curl_setopt_array($curl, array(
                 CURLOPT_URL => $url,
                 CURLOPT_RETURNTRANSFER => true,
@@ -82,12 +89,7 @@ class HomeController extends Controller
                 CURLOPT_CUSTOMREQUEST => 'GET',
                 CURLOPT_SSL_VERIFYHOST => FALSE,
                 CURLOPT_SSL_VERIFYPEER => FALSE,
-                CURLOPT_HTTPHEADER => array(
-                    'Authorization: Bearer ' . $access,
-                    'nira-auth-forward: ' . base64_encode($username . ':' . $password_digest),
-                    'nira-nonce: ' . $nonce,
-                    'nira-created: ' . $created_request
-                ),
+                CURLOPT_HTTPHEADER => $headers,
             ));
 
             $response = curl_exec($curl);
