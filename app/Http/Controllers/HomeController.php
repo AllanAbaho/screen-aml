@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\Mime\Encoder\Base64Encoder;
 
 class HomeController extends Controller
 {
@@ -48,6 +49,22 @@ class HomeController extends Controller
     public function getPerson($nin)
     {
         try {
+            $username = env('NITA_USERNAME');
+
+
+            $nonce_bytes = $this->generatenonce_asbytes();
+            $nonce = base64_encode($nonce_bytes);
+
+            $timestamp = $this->create_timestamp();
+            $created_digest = $this->timestamp_fordigest($timestamp);
+            $created_digest_bytes = $this->gettimestamp_asbytes($created_digest);
+
+            $passwordhash_bytes = $this->hashpassword_withdigest();
+
+            $password_digest = $this->getPasswordDigest($nonce_bytes, $created_digest_bytes, $passwordhash_bytes);
+
+            $created_request = $this->timestamp_forrequest($timestamp);
+
             $access = $this->getAccessToken();
             $curl = curl_init();
             $baseUrl = 'https://api-uat.integration.go.ug/';
@@ -66,7 +83,10 @@ class HomeController extends Controller
                 CURLOPT_SSL_VERIFYHOST => FALSE,
                 CURLOPT_SSL_VERIFYPEER => FALSE,
                 CURLOPT_HTTPHEADER => array(
-                    'Authorization: Bearer ' . $access
+                    'Authorization: Bearer ' . $access,
+                    'nira-auth-forward: ' . base64_encode($username . ':' . $password_digest),
+                    'nira-nonce: ' . $nonce,
+                    'nira-created: ' . $created_request
                 ),
             ));
 
@@ -87,95 +107,82 @@ class HomeController extends Controller
         }
     }
 
-    // public function getBearerToken()
-    // {
-    //     $nonce_bytes = $this->generatenonce_asbytes();
-    //     $nonce = base64_encode($nonce_bytes);
+    public function generatenonce_asbytes()
+    {
+        return random_bytes(16);
+    }
 
-    //     $timestamp = $this->create_timestamp();
-    //     $created_digest = $this->timestamp_fordigest($timestamp);
-    //     $created_digest_bytes = $this->gettimestamp_asbytes($created_digest);
+    public function create_requesttimestamp()
+    {
+        $utc_now = new \DateTime('now', new \DateTimeZone('UTC'));
+        $eat_timezone = new \DateTimeZone('Africa/Kampala');
+        $eat_now = $utc_now->setTimezone($eat_timezone);
+        $eat_time = $eat_now->format('Y-m-d\TH:i:s');
 
-    //     $passwordhash_bytes = $this->hashpassword_withdigest();
+        return $eat_time . '+03:00';
+    }
 
-    //     $password_digest = $this->generatedigest_withbytesvalues($nonce_bytes, $created_digest_bytes, $passwordhash_bytes);
+    public function create_timestamp()
+    {
+        $utc_now = new \DateTime('now', new \DateTimeZone('UTC'));
+        $eat_timezone = new \DateTimeZone('Africa/Kampala');
+        $eat_now = $utc_now->setTimezone($eat_timezone);
+        $eat_time = $eat_now->format('Y-m-d\TH:i:s.v0');
 
-    //     $created_request = $this->timestamp_forrequest($timestamp);
-    // }
+        return $eat_time;
+    }
 
-    // public function generatenonce_asbytes()
-    // {
-    //     return random_bytes(16);
-    // }
+    public function timestamp_forrequest($timestamp)
+    {
+        return substr($timestamp, 0, -1) . '+03:00';
+    }
 
-    // public function create_requesttimestamp()
-    // {
-    //     $utc_now = new \DateTime('now', new \DateTimeZone('UTC'));
-    //     $eat_timezone = new \DateTimeZone('Africa/Kampala');
-    //     $eat_now = $utc_now->setTimezone($eat_timezone);
-    //     $eat_time = $eat_now->format('Y-m-d\TH:i:s');
+    public function timestamp_fordigest($timestamp)
+    {
+        return substr($timestamp, 0, -1) . '+0300';
+    }
 
-    //     return $eat_time . '+03:00';
-    // }
+    public function gettimestamp_asbytes($timestamp)
+    {
+        return mb_convert_encoding($timestamp, 'UTF-8');
+    }
 
-    // public function create_timestamp()
-    // {
-    //     $utc_now = new \DateTime('now', new \DateTimeZone('UTC'));
-    //     $eat_timezone = new \DateTimeZone('Africa/Kampala');
-    //     $eat_now = $utc_now->setTimezone($eat_timezone);
-    //     $eat_time = $eat_now->format('Y-m-d\TH:i:s');
+    public function hashpassword_withdigest()
+    {
+        return sha1(mb_convert_encoding(env('NITA_PASSWORD'), 'UTF-8'), true);
+    }
 
-    //     return $eat_time;
-    // }
+    function getPasswordDigest($nonce, $created, $password_hash)
+    {
+        $combined_bytearray = '';
+        $combined_bytearray .= $nonce;
+        $combined_bytearray .= $created;
+        $combined_bytearray .= $password_hash;
 
-    // public function timestamp_forrequest($timestamp)
-    // {
-    //     return substr($timestamp, 0, -6) . '+03:00';
-    // }
+        $encoded_digest = sha1($combined_bytearray, true);
+        $password_digest = base64_encode($encoded_digest);
 
-    // public function timestamp_fordigest($timestamp)
-    // {
-    //     return substr($timestamp, 0, -9) . '+0300';
-    // }
+        return mb_convert_encoding($password_digest, 'UTF-8');
+    }
 
-    // public function gettimestamp_asbytes($timestamp)
-    // {
-    //     return mb_convert_encoding($timestamp, 'UTF-8');
-    // }
+    public function getAuthBearer()
+    {
+        $username = env('NITA_USERNAME');
 
-    // public function hashpassword_withdigest()
-    // {
-    //     return sha1(mb_convert_encoding(env('NITA_PASSWORD'), 'UTF-8'), true);
-    // }
 
-    // function getPasswordDigest($nonce, $created, $password_hash)
-    // {
-    //     $combined_bytearray = '';
-    //     $combined_bytearray .= $nonce;
-    //     $combined_bytearray .= $created;
-    //     $combined_bytearray .= $password_hash;
+        $nonce_bytes = $this->generatenonce_asbytes();
+        $nonce = base64_encode($nonce_bytes);
 
-    //     $encoded_digest = sha1($combined_bytearray, true);
-    //     $password_digest = base64_encode($encoded_digest);
+        $timestamp = $this->create_timestamp();
+        $created_digest = $this->timestamp_fordigest($timestamp);
+        $created_digest_bytes = $this->gettimestamp_asbytes($created_digest);
 
-    //     return mb_convert_encoding($password_digest, 'UTF-8');
-    // }
+        $passwordhash_bytes = $this->hashpassword_withdigest();
 
-    // public function getAuthBearer()
-    // {
-    //     $username = env('NITA_USERNAME');
+        $password_digest = $this->getPasswordDigest($nonce_bytes, $created_digest_bytes, $passwordhash_bytes);
 
-    //     $nonce_bytes = $this->generatenonce_asbytes();
-    //     $nonce = base64_encode($nonce_bytes);
+        $created_request = $this->timestamp_forrequest($timestamp);
 
-    //     $timestamp = $this->create_timestamp();
-    //     $created_digest = $this->timestamp_fordigest($timestamp);
-    //     $created_digest_bytes = $this->gettimestamp_asbytes($created_digest);
-
-    //     $passwordhash_bytes = $this->hashpassword_withdigest();
-
-    //     $password_digest = $this->generatedigest_withbytesvalues($nonce_bytes, $created_digest_bytes, $passwordhash_bytes);
-
-    //     $created_request = $this->timestamp_forrequest($timestamp);
-    // }
+        dd([$username, $password_digest,  $nonce, $created_request]);
+    }
 }
