@@ -86,4 +86,96 @@ class HomeController extends Controller
             return $e->getMessage();
         }
     }
+
+    // public function getBearerToken()
+    // {
+    //     $nonce_bytes = $this->generatenonce_asbytes();
+    //     $nonce = base64_encode($nonce_bytes);
+
+    //     $timestamp = $this->create_timestamp();
+    //     $created_digest = $this->timestamp_fordigest($timestamp);
+    //     $created_digest_bytes = $this->gettimestamp_asbytes($created_digest);
+
+    //     $passwordhash_bytes = $this->hashpassword_withdigest();
+
+    //     $password_digest = $this->generatedigest_withbytesvalues($nonce_bytes, $created_digest_bytes, $passwordhash_bytes);
+
+    //     $created_request = $this->timestamp_forrequest($timestamp);
+    // }
+
+    // public function generatenonce_asbytes()
+    // {
+    //     return random_bytes(16);
+    // }
+
+    // public function create_requesttimestamp()
+    // {
+    //     $utc_now = new \DateTime('now', new \DateTimeZone('UTC'));
+    //     $eat_timezone = new \DateTimeZone('Africa/Kampala');
+    //     $eat_now = $utc_now->setTimezone($eat_timezone);
+    //     $eat_time = $eat_now->format('Y-m-d\TH:i:s');
+
+    //     return $eat_time . '+03:00';
+    // }
+
+    // public function create_timestamp()
+    // {
+    //     $utc_now = new \DateTime('now', new \DateTimeZone('UTC'));
+    //     $eat_timezone = new \DateTimeZone('Africa/Kampala');
+    //     $eat_now = $utc_now->setTimezone($eat_timezone);
+    //     $eat_time = $eat_now->format('Y-m-d\TH:i:s');
+
+    //     return $eat_time;
+    // }
+
+    // public function timestamp_forrequest($timestamp)
+    // {
+    //     return substr($timestamp, 0, -6) . '+03:00';
+    // }
+
+    // public function timestamp_fordigest($timestamp)
+    // {
+    //     return substr($timestamp, 0, -9) . '+0300';
+    // }
+
+    // public function gettimestamp_asbytes($timestamp)
+    // {
+    //     return mb_convert_encoding($timestamp, 'UTF-8');
+    // }
+
+    // public function hashpassword_withdigest()
+    // {
+    //     return sha1(mb_convert_encoding(env('NITA_PASSWORD'), 'UTF-8'), true);
+    // }
+
+    // function getPasswordDigest($nonce, $created, $password_hash)
+    // {
+    //     $combined_bytearray = '';
+    //     $combined_bytearray .= $nonce;
+    //     $combined_bytearray .= $created;
+    //     $combined_bytearray .= $password_hash;
+
+    //     $encoded_digest = sha1($combined_bytearray, true);
+    //     $password_digest = base64_encode($encoded_digest);
+
+    //     return mb_convert_encoding($password_digest, 'UTF-8');
+    // }
+
+    // public function getAuthBearer()
+    // {
+    //     $username = env('NITA_USERNAME');
+
+    //     $nonce_bytes = $this->generatenonce_asbytes();
+    //     $nonce = base64_encode($nonce_bytes);
+
+    //     $timestamp = $this->create_timestamp();
+    //     $created_digest = $this->timestamp_fordigest($timestamp);
+    //     $created_digest_bytes = $this->gettimestamp_asbytes($created_digest);
+
+    //     $passwordhash_bytes = $this->hashpassword_withdigest();
+
+    //     $password_digest = $this->generatedigest_withbytesvalues($nonce_bytes, $created_digest_bytes, $passwordhash_bytes);
+
+    //     $created_request = $this->timestamp_forrequest($timestamp);
+    // }
 }
