@@ -319,9 +319,9 @@ class DashboardController extends Controller
         curl_close($ch);
         $decodedResponse = json_decode($response, true);
         $status = $decodedResponse['status'];
-        $transactionStatus = $decodedResponse['transaction'] ? $decodedResponse['transaction']['status'] : [];
 
         if ($status == 'SUCCESS') {
+            $transactionStatus = $decodedResponse['transaction']['status'];
             $walletTopup = WalletTopups::where('transactionID', $transactionID)->first();
             $walletTopup->status = $transactionStatus;
             $walletTopup->save();
