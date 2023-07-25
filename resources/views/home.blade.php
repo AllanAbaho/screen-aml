@@ -9,6 +9,8 @@
   <meta content="Search Customers Through Sanction Lists, PEP Lists, Adverse Media, National ID & Company Verification." name="description">
   <meta content="The only Easy, Accurate & Affordable Anti-Money Laundering & Know Your Customer Online Tool In Uganda." name="description">
   <meta content="" name="keywords">
+  <meta property="og:image" content="{{ asset('assets/frontend/img/favicon.JPG') }}" />
+
 
   <!-- Favicons -->
   <link href="{{ asset('assets/frontend/img/favicon.JPG') }}" rel="icon">
