@@ -319,16 +319,18 @@ class DashboardController extends Controller
         curl_close($ch);
         $decodedResponse = json_decode($response, true);
         $status = $decodedResponse['status'];
+        $transactionStatus = $decodedResponse['transaction']['status'];
 
         if ($status == 'SUCCESS') {
             $walletTopup = WalletTopups::where('transactionID', $transactionID)->first();
-            $walletTopup->status = $status;
+            $walletTopup->status = $transactionStatus;
             $walletTopup->save();
-            $user = User::where('id', $walletTopup->user_id)->first();
-            $user->wallet_balance += $walletTopup->amount;
-            $user->save();
+            if ($transactionStatus == 'SUCCESS') {
+                $user = User::where('id', $walletTopup->user_id)->first();
+                $user->wallet_balance += $walletTopup->amount;
+                $user->save();
+            }
         }
-
         return $status;
     }
 
