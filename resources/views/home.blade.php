@@ -10,7 +10,7 @@
   <meta content="The only Easy, Accurate & Affordable Anti-Money Laundering & Know Your Customer Online Tool In Uganda." name="description">
   <meta content="" name="keywords">
   <!-- <meta property="og:image:secure" content="{{ asset('assets/frontend/img/favicon.JPG') }}" /> -->
-  <meta property="og:image" itemprop="image" content="{{ asset('assets/frontend/img/favicon.JPG') }}">
+  <meta property="og:secure_url" itemprop="image" content="{{ asset('assets/frontend/img/favicon.JPG') }}">
   <meta property="og:type" content="website" />
 
   <!-- Favicons -->
