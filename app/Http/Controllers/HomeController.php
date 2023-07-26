@@ -15,6 +15,8 @@ class HomeController extends Controller
 
     public function getAccessToken()
     {
+        $ursbToken = 'M0M1T2h6NU13ZDhBMmZ1al91X3FqRUF6RmwwYToySV9Lc21wcVBSNk9zaUlLbFRMc01INlk1a2th';
+        $niraToken = 'TVpSNmxSR092aVpWN0FSREtPNFdmdE9TV21NYTptdjlXVTJCcHIxbVIxWUNvVWJsQ2p3MGJJb2th';
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://api-uat.integration.go.ug/token',
@@ -29,7 +31,7 @@ class HomeController extends Controller
             CURLOPT_SSL_VERIFYPEER => FALSE,
             CURLOPT_POSTFIELDS => 'grant_type=client_credentials',
             CURLOPT_HTTPHEADER => array(
-                'Authorization: Basic M0M1T2h6NU13ZDhBMmZ1al91X3FqRUF6RmwwYToySV9Lc21wcVBSNk9zaUlLbFRMc01INlk1a2th',
+                'Authorization: Basic ' . $niraToken,
                 'Content-Type: application/x-www-form-urlencoded'
             ),
         ));
