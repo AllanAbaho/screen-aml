@@ -21,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/update-balance', 'App\Http\Controllers\DashboardController@updateBalance')->name('dashboard.update-balance');
 Route::get('/ursb/{entity}', 'HomeController@ursb');
 Route::get('/getAuthBearer', 'App\Http\Controllers\HomeController@getAuthBearer');
+Route::get('/getAccessToken', 'App\Http\Controllers\HomeController@getAccessToken');
 Route::get('/getPerson/{nin}', 'App\Http\Controllers\HomeController@getPerson');
