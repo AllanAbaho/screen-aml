@@ -41,7 +41,9 @@ class HomeController extends Controller
             return response(['status' => 'failure', 'message' => $error_msg]);
         }
         curl_close($curl);
+        Log::info(['Nita Bearer Response', $response]);
         $json = json_decode($response, true);
+        Log::info(['Json Response', $response]);
 
         return $json['access_token'];
     }
