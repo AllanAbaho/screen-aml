@@ -147,6 +147,7 @@ class HomeController extends Controller
     public function gettimestamp_asbytes($timestamp)
     {
         return mb_convert_encoding($timestamp, 'UTF-8');
+        // return utf8_encode($timestamp);
     }
 
     public function hashpassword_withdigest()
@@ -161,7 +162,8 @@ class HomeController extends Controller
         $encoded_digest = sha1($combined_bytearray, true);
         $password_digest = base64_encode($encoded_digest);
 
-        return mb_convert_encoding($password_digest, 'UTF-8');
+        return mb_convert_encoding($password_digest, 'ISO-8859-1');
+        // return utf8_decode($password_digest);
     }
 
     public function getAuthBearer()
