@@ -156,10 +156,7 @@ class HomeController extends Controller
 
     function getPasswordDigest($nonce, $created, $password_hash)
     {
-        $combined_bytearray = '';
-        $combined_bytearray .= $nonce;
-        $combined_bytearray .= $created;
-        $combined_bytearray .= $password_hash;
+        $combined_bytearray = $nonce . $created . $password_hash;
 
         $encoded_digest = sha1($combined_bytearray, true);
         $password_digest = base64_encode($encoded_digest);
