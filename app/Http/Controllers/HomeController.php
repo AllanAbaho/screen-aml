@@ -102,6 +102,8 @@ class HomeController extends Controller
             curl_close($curl);
             // $xml = simplexml_load_string($response, "SimpleXMLElement", LIBXML_NOCDATA);
             // $json = json_encode($xml);
+            return $response;
+
             $array = json_decode($response, true);
 
             Log::info('Returned Array', [$array]);
