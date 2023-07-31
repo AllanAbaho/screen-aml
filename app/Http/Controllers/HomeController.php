@@ -100,9 +100,9 @@ class HomeController extends Controller
             Log::info('Nira Response', [$response]);
 
             curl_close($curl);
-            $xml = simplexml_load_string($response, "SimpleXMLElement", LIBXML_NOCDATA);
-            $json = json_encode($xml);
-            $array = json_decode($json, TRUE);
+            // $xml = simplexml_load_string($response, "SimpleXMLElement", LIBXML_NOCDATA);
+            // $json = json_encode($xml);
+            $array = json_decode($response, true);
 
             Log::info('Returned Array', [$array]);
 
