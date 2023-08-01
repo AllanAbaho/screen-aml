@@ -23,3 +23,4 @@ Route::get('/ursb/{entity}', 'HomeController@ursb');
 Route::get('/getAuthBearer', 'App\Http\Controllers\HomeController@getAuthBearer');
 Route::get('/getAccessToken', 'App\Http\Controllers\HomeController@getAccessToken');
 Route::get('/getPerson/{nin}', 'App\Http\Controllers\HomeController@getPerson');
+Route::get('/getBusiness/{brn}', 'App\Http\Controllers\HomeController@getBusiness');

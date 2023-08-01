@@ -76,8 +76,7 @@
                                 <?php
                                 $content = json_decode($results['content'], true);
                                 $rows = $content['data']['hits'];
-
-
+                                $niraDetails = $content['nira'] ?? null;
                                 if (count($rows) > 0) :
                                 ?>
 
@@ -124,13 +123,41 @@
                                                         }
                                                         ?>
                                                     </td>
-                                                    <td><a href="../generate-pdf/{{$searchId}}/{{$docId}}"><i class="fa fa-download"></i>  Download</a></td>
+                                                    <td><a href="../generate-pdf/{{$searchId}}/{{$docId}}"><i class="fa fa-download"></i> Download</a></td>
                                                 </tr>
                                             <?php endfor; ?>
                                         </tbody>
                                     </table>
 
-                                <?php else : ?>
+                                <?php
+
+                                elseif ($niraDetails) :
+                                    $docId = 'nira';
+                                ?>
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Full Name</th>
+                                                <th scope="col">Gender</th>
+                                                <th scope="col">Date Of Birth</th>
+                                                <th scope="col">Marital Status</th>
+                                                <th scope="col">Living Status</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row"><?= 1 ?></th>
+                                                <td><?= $niraDetails['surname'] . ' ' . $niraDetails['givenNames'] ?></td>
+                                                <td><?= $niraDetails['gender'] ?></td>
+                                                <td><?= $niraDetails['dateOfBirth'] ?></td>
+                                                <td><?= $niraDetails['maritalStatus'] ?></td>
+                                                <td><?= $niraDetails['livingStatus'] ?></td>
+                                                <td><a href="../generate-pdf/{{$searchId}}/{{$docId}}"><i class="fa fa-download"></i> Download</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table> <?php else : ?>
                                     <p>No results found</p>
                                 <?php endif; ?>
                             </div>

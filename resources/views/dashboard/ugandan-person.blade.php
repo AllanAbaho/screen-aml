@@ -73,18 +73,14 @@
                                 <form action="{{ route('dashboard.search') }}" method="post">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                     <div class="form-group">
-                                        <label for="person" class=" form-control-label">Full Name</label>
-                                        <input type="text" name="search_term" placeholder="Enter name" class="form-control" required>
+                                        <label for="nin" class=" form-control-label">National Identification Number</label>
+                                        <input type="text" name="nin" value="CM930121003EGE" class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="entity-type" class=" form-control-label">Entity Type</label>
 
                                         <select name="entity_type" class="form-control" tabindex="1">
                                             <option value="person">Person</option>
-                                            <option value="company">Company</option>
-                                            <option value="organisation">Organisation</option>
-                                            <option value="vessel">Vessel</option>
-                                            <option value="aircraft">Aircraft</option>
                                         </select>
                                     </div>
                                     <div class="form-group">

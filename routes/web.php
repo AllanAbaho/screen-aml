@@ -55,6 +55,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
         Route::post('/dashboard/search', 'DashboardController@search')->name('dashboard.search');
         Route::get('/dashboard/search', 'DashboardController@searchForm')->name('dashboard.search-form');
+        Route::get('/dashboard/ugandan-person', 'DashboardController@ugandanPerson')->name('dashboard.ugandan-person');
+        Route::get('/dashboard/ugandan-company', 'DashboardController@ugandanCompany')->name('dashboard.ugandan-company');
         Route::get('/dashboard/add-credit', 'DashboardController@addCredit')->name('dashboard.add-credit');
         Route::post('/dashboard/collect-payment', 'DashboardController@collectPayment')->name('dashboard.collect-payment');
         Route::post('/dashboard/etherone-payment', 'DashboardController@etheronePayment')->name('dashboard.etherone-payment');

@@ -13,10 +13,15 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function getAccessToken()
+    public function getAccessToken($category)
     {
         $ursbToken = 'M0M1T2h6NU13ZDhBMmZ1al91X3FqRUF6RmwwYToySV9Lc21wcVBSNk9zaUlLbFRMc01INlk1a2th';
         $niraToken = 'TVpSNmxSR092aVpWN0FSREtPNFdmdE9TV21NYTptdjlXVTJCcHIxbVIxWUNvVWJsQ2p3MGJJb2th';
+        if ($category == 'NIRA') {
+            $token = $niraToken;
+        } else {
+            $token = $ursbToken;
+        }
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://api-uat.integration.go.ug/token',
@@ -31,7 +36,7 @@ class HomeController extends Controller
             CURLOPT_SSL_VERIFYPEER => FALSE,
             CURLOPT_POSTFIELDS => 'grant_type=client_credentials',
             CURLOPT_HTTPHEADER => array(
-                'Authorization: Basic ' . $niraToken,
+                'Authorization: Basic ' . $token,
                 'Content-Type: application/x-www-form-urlencoded'
             ),
         ));
@@ -69,7 +74,7 @@ class HomeController extends Controller
 
             $created_request = $this->timestamp_forrequest($timestamp);
 
-            $access = $this->getAccessToken();
+            $access = $this->getAccessToken('NIRA');
             $curl = curl_init();
             $baseUrl = 'https://api-uat.integration.go.ug/';
             $niraUrl = 't/nira.go.ug/nira-api/1.0.0/';
@@ -82,6 +87,68 @@ class HomeController extends Controller
             );
             Log::info('API Url', [$url, $headers]);
 
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_SSL_VERIFYHOST => FALSE,
+                CURLOPT_SSL_VERIFYPEER => FALSE,
+                CURLOPT_HTTPHEADER => $headers,
+            ));
+
+            $response = curl_exec($curl);
+            Log::info('Nira Response', [$response]);
+
+            curl_close($curl);
+            // $xml = simplexml_load_string($response, "SimpleXMLElement", LIBXML_NOCDATA);
+            // $json = json_encode($xml);
+            $array = json_decode($response, true);
+
+            Log::info('Returned Array', [$array]);
+
+            return $array;
+        } catch (Exception $e) {
+            Log::info('An error occured', [$e->getMessage()]);
+            return $e->getMessage();
+        }
+    }
+
+    public function getBusiness($brn)
+    {
+        try {
+            $username = env('NITA_USERNAME');
+
+
+            $nonce_bytes = $this->generatenonce_asbytes();
+            $nonce = base64_encode($nonce_bytes);
+
+            $timestamp = $this->create_timestamp();
+            $created_digest = $this->timestamp_fordigest($timestamp);
+            $created_digest_bytes = $this->gettimestamp_asbytes($created_digest);
+
+            $passwordhash_bytes = $this->hashpassword_withdigest();
+
+            $password_digest = $this->getPasswordDigest($nonce_bytes, $created_digest_bytes, $passwordhash_bytes);
+
+            $created_request = $this->timestamp_forrequest($timestamp);
+
+            $access = $this->getAccessToken('URSB');
+            $curl = curl_init();
+            $baseUrl = 'https://api-uat.integration.go.ug/';
+            $niraUrl = 't/ursb.go.ug/ursb-brs-api/1.0.0/';
+            $url = $baseUrl . $niraUrl . 'entity/get_entity_full/' . $brn . '/-/APS-NITA';
+            $headers = array(
+                'Authorization: Bearer ' . $access,
+                'nira-auth-forward: ' . base64_encode($username . ':' . $password_digest),
+                'nira-nonce: ' . $nonce,
+                'nira-created: ' . $created_request
+            );
+            Log::info('API Url', [$url, $headers]);
             curl_setopt_array($curl, array(
                 CURLOPT_URL => $url,
                 CURLOPT_RETURNTRANSFER => true,
