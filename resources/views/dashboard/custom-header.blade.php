@@ -1,9 +1,11 @@
 <!-- Header-->
 <header id="header" class="header">
-<?php use Illuminate\Support\Facades\Auth; ?>
+    <?php
+
+    use Illuminate\Support\Facades\Auth; ?>
     <div class="top-left">
         <div class="navbar-header">
-            <a class="navbar-brand" href="./"><img height="40px" src="{{asset('assets/backend/images/favicon.JPG') }}" alt="Logo"> KYC UGANDA</a>
+            <a class="navbar-brand" href="./"><img height="40px" src="{{asset('assets/frontend/img/favicon.JPG') }}" alt="Logo"> KYC UGANDA</a>
             <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
         </div>
     </div>
@@ -14,8 +16,7 @@
                 <a class="btn btn-success" href="{{ route('dashboard.add-credit') }}">Add Credit </a>
                 &nbsp;
                 <div class="dropdown for-notification">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="notification"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-bell"></i>
                         <span class="count bg-danger">3</span>
                     </button>
@@ -37,8 +38,7 @@
                 </div>
 
                 <div class="dropdown for-message">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-envelope"></i>
                         <span class="count bg-primary">4</span>
                     </button>
@@ -53,7 +53,7 @@
                             </div>
                         </a>
                         <a class="dropdown-item media" href="#">
-                        <span class="photo media-left"><img alt="avatar" src="{{ asset('assets/backend/images/avatar/2.jpg') }}"></span>
+                            <span class="photo media-left"><img alt="avatar" src="{{ asset('assets/backend/images/avatar/2.jpg') }}"></span>
                             <div class="message media-body">
                                 <span class="name float-left">Jack Sanders</span>
                                 <span class="time float-right">5 minutes ago</span>
@@ -61,7 +61,7 @@
                             </div>
                         </a>
                         <a class="dropdown-item media" href="#">
-                        <span class="photo media-left"><img alt="avatar" src="{{ asset('assets/backend/images/avatar/3.jpg') }}"></span>
+                            <span class="photo media-left"><img alt="avatar" src="{{ asset('assets/backend/images/avatar/3.jpg') }}"></span>
                             <div class="message media-body">
                                 <span class="name float-left">Cheryl Wheeler</span>
                                 <span class="time float-right">10 minutes ago</span>
@@ -69,7 +69,7 @@
                             </div>
                         </a>
                         <a class="dropdown-item media" href="#">
-                        <span class="photo media-left"><img alt="avatar" src="{{ asset('assets/backend/images/avatar/4.jpg') }}"></span>
+                            <span class="photo media-left"><img alt="avatar" src="{{ asset('assets/backend/images/avatar/4.jpg') }}"></span>
                             <div class="message media-body">
                                 <span class="name float-left">Rachel Santos</span>
                                 <span class="time float-right">15 minutes ago</span>
@@ -81,16 +81,14 @@
             </div>
 
             <div class="user-area dropdown float-right">
-                <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
+                <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="user-avatar rounded-circle" src="{{ asset('assets/backend/images/admin.jpg') }}" alt="User Avatar">
                 </a>
 
                 <div class="user-menu dropdown-menu">
                     <a class="nav-link" href="profile.html"><i class="fa fa-user"></i>My Profile</a>
 
-                    <a class="nav-link" href="#"><i class="fa fa-bell-o"></i>Notifications <span
-                            class="count">13</span></a>
+                    <a class="nav-link" href="#"><i class="fa fa-bell-o"></i>Notifications <span class="count">13</span></a>
 
                     <a class="nav-link" href="#"><i class="fa fa-cog"></i>Settings</a>
 

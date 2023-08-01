@@ -3,14 +3,14 @@
 
 <head>
     <title><?= $title; ?></title>
-    <link rel="shortcut icon" href="{{asset('assets/backend/images/favicon.JPG') }}">
+    <link rel="shortcut icon" href="{{asset('assets/frontend/img/favicon.JPG') }}">
 </head>
 
 <body style="display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;">
-    <img src="{{asset('assets/backend/images/favicon.JPG') }}" height="50px" alt="logo">
+    <img src="{{asset('assets/frontend/img/favicon.JPG') }}" height="50px" alt="logo">
     <h1>{{ $title }}</h1>
     <p>{{ $date }}</p>
     <?php if ($niraDetails) : ?>
