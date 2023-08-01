@@ -77,6 +77,7 @@
                                 $content = json_decode($results['content'], true);
                                 $rows = $content['data']['hits'];
                                 $niraDetails = $content['nira'] ?? null;
+                                $ursbDetails = $content['ursb'] ?? null;
                                 if (count($rows) > 0) :
                                 ?>
 
@@ -157,7 +158,37 @@
                                                 <td><a href="../generate-pdf/{{$searchId}}/{{$docId}}"><i class="fa fa-download"></i> Download</a></td>
                                             </tr>
                                         </tbody>
-                                    </table> <?php else : ?>
+                                    </table>
+                                <?php
+
+                                elseif ($ursbDetails) :
+                                    $docId = 'ursb';
+                                ?>
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Full Name</th>
+                                                <th scope="col">Certificate No.</th>
+                                                <th scope="col">Owner name</th>
+                                                <th scope="col">Registration Date</th>
+                                                <th scope="col">Phone Contact</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row"><?= 1 ?></th>
+                                                <td><?= $ursbDetails['entity_name'] ?></td>
+                                                <td><?= $ursbDetails['cert_number'] ?></td>
+                                                <td><?= $ursbDetails['applicant'] ?></td>
+                                                <td><?= $ursbDetails['reg_date']  ?></td>
+                                                <td><?= $ursbDetails['phone_mobile'] ?></td>
+                                                <td><a href="../generate-pdf/{{$searchId}}/{{$docId}}"><i class="fa fa-download"></i> Download</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                <?php else : ?>
                                     <p>No results found</p>
                                 <?php endif; ?>
                             </div>

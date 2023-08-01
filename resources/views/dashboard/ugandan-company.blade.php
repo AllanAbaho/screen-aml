@@ -74,7 +74,7 @@
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                     <div class="form-group">
                                         <label for="brn" class=" form-control-label">Business Registration Number</label>
-                                        <input type="text" name="brn" placeholder="Enter Business Registration Number" class="form-control" required>
+                                        <input type="text" name="brn" value="80017272628069" class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="entity-type" class=" form-control-label">Entity Type</label>

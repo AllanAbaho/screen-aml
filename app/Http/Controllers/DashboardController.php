@@ -29,6 +29,7 @@ class DashboardController extends Controller
         $content = json_decode($results['content'], true);
         $rows = $content['data']['hits'];
         $niraDetails = $content['nira'] ?? null;
+        $ursbDetails = $content['ursb'] ?? null;
 
         $pageDetails = [];
         for ($i = 0; $i < count($rows); $i++) {
@@ -43,9 +44,10 @@ class DashboardController extends Controller
             'date' => date('m/d/Y'),
             'pageDetails' => $pageDetails,
             'niraDetails' => $niraDetails,
+            'ursbDetails' => $ursbDetails,
         ];
 
-        $fileName = $pageDetails['name']  ?? $niraDetails['surname'];
+        $fileName = $pageDetails['name']  ?? $niraDetails['surname'] ?? $ursbDetails['entity_name'];
         // dd($fileName, $pageDetails, $niraDetails);
         // $user->wallet_balance = $user->wallet_balance - 2500;
         // $user->save();
@@ -180,6 +182,7 @@ class DashboardController extends Controller
             $entity_type = $request->get('entity_type');
             $match_types = $request->get('match_types');
             $personData = [];
+            $businessData = [];
             if (isset($nin)) {
                 $person = $this->getPerson($nin);
                 $transactionStatus = $person['transactionStatus']['transactionStatus'];
@@ -202,26 +205,19 @@ class DashboardController extends Controller
                 ];
             }
             if (isset($brn)) {
-                $search_term = $brn;
-                // $person = $this->getBusiness($brn);
-                // $transactionStatus = $person['transactionStatus']['transactionStatus'];
-                // if ($transactionStatus == 'Error') {
-                //     $error_msg = $person['transactionStatus']['error']['message'];
-                //     return redirect()->back()->with('success', $error_msg);
-                // }
-                // $search_term = $person['surname'] . ' ' . $person['givenNames'];
-                // $personData = [
-                //     "nationalId" => $person['nationalId'],
-                //     "surname" => $person['surname'],
-                //     "givenNames" => $person['givenNames'],
-                //     "dateOfBirth" => $person['dateOfBirth'],
-                //     "gender" => $person['gender'],
-                //     "nationality" => $person['nationality'],
-                //     "livingStatus" => $person['livingStatus'],
-                //     "maritalStatus" => $person['maritalStatus'],
-                //     "eMail1" => $person['eMail1'],
-                //     "addressLine1" => $person['addressLine1'],
-                // ];
+                $business = $this->getBusiness($brn);
+                if (isset($business['error_code'])) {
+                    return redirect()->back()->with('success', $business['error_code']);
+                }
+                $search_term = $business['entity_name'];
+                $businessData = [
+                    'cert_number' => $business['cert_number'],
+                    'entity_name' => $business['entity_name'],
+                    'company_type' => $business['company_type'],
+                    'applicant' => $business['metadata']['applicant'],
+                    'reg_date' => $business['reg_date'],
+                    'phone_mobile' => $business['metadata']['group_applicant']['phone_mobile'],
+                ];
             }
             if (isset($search_term) && isset($entity_type)) {
                 $url = env('COMPLY_API') . '/searches';
@@ -250,6 +246,7 @@ class DashboardController extends Controller
                 Log::info('Search Response', [$result]);
                 if ($result['status'] == 'success') {
                     $result['content']['nira'] = $personData;
+                    $result['content']['ursb'] = $businessData;
 
                     $search = new Searches();
                     $search->name = $search_term;
@@ -481,6 +478,6 @@ class DashboardController extends Controller
         $result = curl_exec($curl);
         curl_close($curl);
         Log::info(['Nira Response', $result]);
-        return json_decode($result, true)['return'];
+        return json_decode($result, true);
     }
 }

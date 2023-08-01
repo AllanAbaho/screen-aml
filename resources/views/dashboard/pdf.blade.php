@@ -26,6 +26,16 @@
 
     <?php endif; ?>
 
+    <?php if ($ursbDetails) : ?>
+        <p>URSB Details</p>
+        <p><b>Name:</b> <?= $ursbDetails['entity_name'] ?></p>
+        <p><b>Certificate No:</b> <?= $ursbDetails['cert_number'] ?></p>
+        <p><b>Company Type:</b> <?= $ursbDetails['company_type'] ?></p>
+        <p><b>Owner Name:</b> <?= $ursbDetails['applicant'] ?></p>
+        <p><b>Registration Date:</b> <?= $ursbDetails['reg_date'] ?></p>
+        <p><b>Phone Number:</b> <?= $ursbDetails['phone_mobile'] ?></p>
+    <?php endif; ?>
+
     <?php if ($pageDetails) : ?>
 
         <p><b>Name:</b> <?= $pageDetails['name'] ?></p>
