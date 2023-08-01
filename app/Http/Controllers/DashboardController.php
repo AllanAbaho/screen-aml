@@ -202,25 +202,26 @@ class DashboardController extends Controller
                 ];
             }
             if (isset($brn)) {
-                $person = $this->getPerson($brn);
-                $transactionStatus = $person['transactionStatus']['transactionStatus'];
-                if ($transactionStatus == 'Error') {
-                    $error_msg = $person['transactionStatus']['error']['message'];
-                    return redirect()->back()->with('success', $error_msg);
-                }
-                $search_term = $person['surname'] . ' ' . $person['givenNames'];
-                $personData = [
-                    "nationalId" => $person['nationalId'],
-                    "surname" => $person['surname'],
-                    "givenNames" => $person['givenNames'],
-                    "dateOfBirth" => $person['dateOfBirth'],
-                    "gender" => $person['gender'],
-                    "nationality" => $person['nationality'],
-                    "livingStatus" => $person['livingStatus'],
-                    "maritalStatus" => $person['maritalStatus'],
-                    "eMail1" => $person['eMail1'],
-                    "addressLine1" => $person['addressLine1'],
-                ];
+                $search_term = $brn;
+                // $person = $this->getBusiness($brn);
+                // $transactionStatus = $person['transactionStatus']['transactionStatus'];
+                // if ($transactionStatus == 'Error') {
+                //     $error_msg = $person['transactionStatus']['error']['message'];
+                //     return redirect()->back()->with('success', $error_msg);
+                // }
+                // $search_term = $person['surname'] . ' ' . $person['givenNames'];
+                // $personData = [
+                //     "nationalId" => $person['nationalId'],
+                //     "surname" => $person['surname'],
+                //     "givenNames" => $person['givenNames'],
+                //     "dateOfBirth" => $person['dateOfBirth'],
+                //     "gender" => $person['gender'],
+                //     "nationality" => $person['nationality'],
+                //     "livingStatus" => $person['livingStatus'],
+                //     "maritalStatus" => $person['maritalStatus'],
+                //     "eMail1" => $person['eMail1'],
+                //     "addressLine1" => $person['addressLine1'],
+                // ];
             }
             if (isset($search_term) && isset($entity_type)) {
                 $url = env('COMPLY_API') . '/searches';
