@@ -20,9 +20,9 @@ class DashboardController extends Controller
         }
 
         $user = User::where('id', Auth::id())->first();
-        if ($user->wallet_balance < 2500) {
-            return redirect()->route('dashboard.search-results', ['id' => $searchId])->with('success', "Insufficient balance. Please top up to proceed");
-        }
+        // if ($user->wallet_balance < 2500) {
+        //     return redirect()->route('dashboard.search-results', ['id' => $searchId])->with('success', "Insufficient balance. Please top up to proceed");
+        // }
 
 
         $results = Searches::find($searchId);
